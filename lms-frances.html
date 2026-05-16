@@ -1,0 +1,1239 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Le Français Vivant</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:Arial,sans-serif;background:#f5f2ec;color:#1a2744;display:flex;min-height:100vh;}
+:root{--navy:#1a2744;--gold:#c9a84c;--blue:#2b5fa8;--red:#d94f3c;--green:#2d6a2d;--cream:#f5f2ec;--border:rgba(26,39,68,0.13);}
+
+aside{width:210px;min-width:210px;background:var(--navy);display:flex;flex-direction:column;}
+.logo{padding:20px 18px 14px;border-bottom:1px solid rgba(255,255,255,0.1);}
+.flag{display:flex;gap:2px;margin-bottom:8px;}
+.flag span{width:14px;height:20px;border-radius:2px;}
+.fb{background:#2b5fa8;}.fw{background:#fff;}.fr{background:#d94f3c;}
+.logo h1{font-size:15px;color:#fff;font-weight:700;line-height:1.2;}
+.logo small{font-size:9px;color:rgba(255,255,255,0.38);text-transform:uppercase;letter-spacing:.5px;}
+.nlab{font-size:9px;color:rgba(255,255,255,0.3);text-transform:uppercase;letter-spacing:1px;padding:12px 18px 4px;}
+.nl{display:flex;align-items:center;gap:7px;padding:8px 18px;color:rgba(255,255,255,0.58);font-size:12.5px;cursor:pointer;border:none;background:none;width:100%;text-align:left;border-left:3px solid transparent;font-family:Arial,sans-serif;transition:all .15s;}
+.nl:hover{background:rgba(255,255,255,0.06);color:#fff;}
+.nl.active{color:#e8c97a;background:rgba(201,168,76,0.1);border-left-color:var(--gold);}
+
+main{flex:1;overflow-y:auto;}
+.sec{display:none;}.sec.active{display:block;}
+
+.hero{padding:44px 48px;position:relative;overflow:hidden;}
+.navy{background:var(--navy);}.red2{background:var(--red);}.grn{background:var(--green);}.prp{background:#4a2060;}
+.hero::after{content:"«»";position:absolute;right:30px;top:10px;font-size:160px;color:rgba(255,255,255,0.04);pointer-events:none;}
+.badge{display:inline-block;border:1px solid var(--gold);color:#e8c97a;font-size:10px;padding:3px 12px;border-radius:20px;letter-spacing:1px;text-transform:uppercase;margin-bottom:14px;background:rgba(201,168,76,0.1);}
+.hero h2{font-size:34px;color:#fff;font-weight:700;margin-bottom:10px;line-height:1.15;}
+.hero h2 em{color:#e8c97a;font-style:normal;}
+.hero p{color:rgba(255,255,255,0.7);font-size:15px;max-width:520px;line-height:1.7;}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px;}
+.chip{background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);color:rgba(255,255,255,0.78);font-size:12px;padding:5px 13px;border-radius:18px;}
+
+.content{padding:36px 48px;}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:32px;}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px;}
+.card{background:#fff;border:1px solid var(--border);border-radius:12px;padding:20px;}
+.card h3{font-size:14px;color:var(--navy);margin-bottom:8px;font-weight:700;}
+.card p{font-size:13px;color:#4a4a6a;line-height:1.6;}
+.card-icon{font-size:22px;margin-bottom:10px;}
+
+.lcard{border:1px solid var(--border);border-radius:12px;background:#fff;overflow:hidden;cursor:pointer;transition:transform .18s,box-shadow .18s;}
+.lcard:hover{transform:translateY(-3px);box-shadow:0 8px 20px rgba(26,39,68,0.1);}
+.lbar{height:6px;}.lc1 .lbar{background:var(--blue);}.lc2 .lbar{background:var(--gold);}.lc3 .lbar{background:var(--red);}
+.lbody{padding:18px;}
+.lnum{font-size:10px;color:#7a7a9a;text-transform:uppercase;letter-spacing:1px;margin-bottom:5px;}
+.lbody h4{font-size:14px;font-weight:700;color:var(--navy);margin-bottom:5px;}
+.lbody p{font-size:12.5px;color:#4a4a6a;line-height:1.5;}
+.tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:10px;}
+.tag{font-size:10px;padding:2px 8px;border-radius:10px;border:1px solid var(--border);color:#7a7a9a;}
+
+.instbox{background:var(--navy);border-radius:12px;padding:28px 32px;}
+.instbox h3{color:#fff;font-size:17px;margin-bottom:16px;}
+.instgrid{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+.instcol h4{color:#e8c97a;font-size:11px;text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px;}
+.istep{display:flex;gap:9px;margin-bottom:9px;align-items:flex-start;}
+.inum{width:20px;height:20px;border-radius:50%;background:rgba(201,168,76,0.2);border:1px solid var(--gold);color:#e8c97a;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
+.istep p{color:rgba(255,255,255,0.65);font-size:12.5px;line-height:1.5;}
+
+/* LESSON */
+.lhdr{padding:32px 48px 22px;border-bottom:1px solid var(--border);background:#fff;}
+.bread{font-size:10px;color:#7a7a9a;text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px;}
+.lhdr h2{font-size:26px;color:var(--navy);margin-bottom:5px;font-weight:700;}
+.lhdr p{font-size:14px;color:#4a4a6a;}
+.tabs{display:flex;background:#fff;padding:0 48px;border-bottom:1px solid var(--border);}
+.tab{padding:11px 16px;font-size:12.5px;cursor:pointer;border:none;background:none;color:#7a7a9a;border-bottom:2px solid transparent;margin-bottom:-1px;font-family:Arial,sans-serif;transition:all .15s;}
+.tab:hover{color:var(--navy);}
+.tab.active{color:var(--navy);border-bottom-color:var(--navy);font-weight:700;}
+.tbody{padding:30px 48px;}
+.tp{display:none;}.tp.active{display:block;}
+.stitle{font-size:18px;color:var(--navy);font-weight:700;margin-bottom:4px;}
+.ssub{font-size:12.5px;color:#7a7a9a;margin-bottom:20px;}
+
+.ibox{background:#fff;border:1px solid var(--border);border-radius:10px;padding:20px;margin-bottom:14px;}
+.ibox h4{font-size:11px;color:#7a7a9a;text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px;}
+.ibox p{font-size:13.5px;color:#4a4a6a;line-height:1.7;}
+
+.vtable{width:100%;border-collapse:collapse;margin-top:6px;}
+.vtable th{background:#f5f2ec;font-size:10px;color:#7a7a9a;text-transform:uppercase;letter-spacing:.5px;padding:6px 10px;text-align:left;}
+.vtable td{padding:7px 10px;font-size:12.5px;border-bottom:1px solid var(--border);}
+.vtable tr:last-child td{border-bottom:none;}
+.vtable td:first-child{font-weight:700;color:var(--blue);}
+.hr{border:none;border-top:1px solid var(--border);margin:22px 0;}
+
+/* ACTIVITIES */
+.acard{border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:18px;}
+.ahdr{padding:14px 20px;display:flex;align-items:center;gap:10px;}
+.ahdr-b{background:rgba(43,95,168,0.07);}.ahdr-g{background:rgba(201,168,76,0.07);}.ahdr-r{background:rgba(217,79,60,0.07);}
+.abadge{font-size:10px;padding:2px 10px;border-radius:10px;font-weight:700;text-transform:uppercase;}
+.ab-b{background:rgba(43,95,168,0.12);color:#1a3f7a;}.ab-g{background:rgba(201,168,76,0.15);color:#6a4a00;}.ab-r{background:rgba(217,79,60,0.12);color:#8a2010;}
+.ahdr h4{font-size:14px;color:var(--navy);font-weight:700;}
+.abody{background:#fff;padding:20px;border-top:1px solid var(--border);}
+.abody p{font-size:13px;color:#4a4a6a;line-height:1.7;margin-bottom:10px;}
+
+/* QUIZ ENGINE */
+.qprog{font-size:11.5px;color:#7a7a9a;margin-bottom:12px;}
+.qQ{font-size:15px;color:var(--navy);font-weight:700;margin-bottom:14px;line-height:1.5;}
+.qopts{display:grid;gap:7px;margin-bottom:14px;}
+.qopt{padding:10px 14px;border:1px solid var(--border);border-radius:8px;cursor:pointer;font-size:13px;color:#4a4a6a;background:#fff;transition:all .15s;text-align:left;width:100%;font-family:Arial,sans-serif;}
+.qopt:hover{border-color:rgba(43,95,168,0.3);background:rgba(43,95,168,0.04);}
+.qopt.ok{border-color:var(--green);background:rgba(45,106,45,0.06);color:#1a4a1a;}
+.qopt.err{border-color:var(--red);background:rgba(217,79,60,0.06);color:#7a1a10;}
+.qfb{padding:10px 14px;border-radius:8px;font-size:13px;margin-bottom:12px;display:none;}
+.qfb-ok{background:rgba(45,106,45,0.07);border:1px solid rgba(45,106,45,0.22);color:#1a4a1a;}
+.qfb-err{background:rgba(217,79,60,0.07);border:1px solid rgba(217,79,60,0.22);color:#7a1a10;}
+.pbar{height:5px;background:#e8e4da;border-radius:3px;overflow:hidden;margin-bottom:4px;}
+.pfill{height:100%;background:var(--blue);border-radius:3px;transition:width .3s;}
+.score-big{font-size:28px;font-weight:700;color:var(--navy);}
+.score-sub{font-size:13px;color:#7a7a9a;margin-bottom:14px;}
+
+/* BUTTONS */
+.btn{padding:9px 22px;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;font-family:Arial,sans-serif;border:none;transition:all .15s;}
+.btn-n{background:var(--navy);color:#fff;}.btn-n:hover{background:#253460;}
+.btn-g{background:var(--gold);color:var(--navy);}.btn-g:hover{background:#e8c97a;}
+.btn-s{background:#fff;color:var(--navy);border:1px solid var(--border);}.btn-s:hover{background:#f5f2ec;}
+
+/* MURAL */
+.mural-bg{background:#e8e4da;border-radius:12px;padding:16px;min-height:80px;}
+.mcard{background:#fff;border:1px solid var(--border);border-radius:10px;padding:12px;display:inline-block;margin:5px;max-width:160px;font-size:12.5px;color:#4a4a6a;line-height:1.5;vertical-align:top;}
+.mcard strong{color:var(--navy);display:block;margin-bottom:3px;font-size:13px;}
+.mini-form label{font-size:11px;color:#7a7a9a;display:block;margin-bottom:2px;margin-top:8px;}
+.mini-form input,.mini-form select,.mini-form textarea{width:100%;padding:8px 10px;border:1px solid var(--border);border-radius:7px;font-size:13px;font-family:Arial,sans-serif;color:var(--navy);background:#fff;}
+.mini-form textarea{height:80px;resize:vertical;}
+.wc{font-size:11px;color:#7a7a9a;margin-top:3px;}
+
+/* FLASHCARD */
+.fc-wrap{perspective:700px;height:130px;cursor:pointer;margin-bottom:14px;}
+.fc-inner{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform .45s;}
+.fc-wrap.flip .fc-inner{transform:rotateY(180deg);}
+.fc-f,.fc-b{position:absolute;inset:0;backface-visibility:hidden;border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:18px;}
+.fc-f{background:var(--navy);}
+.fc-b{background:var(--blue);transform:rotateY(180deg);}
+.fc-word{font-size:22px;font-weight:700;color:#fff;}
+.fc-hint{font-size:11px;color:rgba(255,255,255,0.55);margin-top:5px;}
+.fc-nav{display:flex;align-items:center;gap:8px;margin-bottom:16px;}
+.fc-cnt{font-size:12px;color:#7a7a9a;}
+
+/* GAME */
+.wgrid{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px;}
+.ww{padding:8px 13px;background:#fff;border:1px solid var(--border);border-radius:7px;font-size:13px;cursor:pointer;transition:all .15s;color:#4a4a6a;}
+.ww:hover{border-color:var(--blue);}
+.ww.picked{background:var(--navy);color:#fff;border-color:var(--navy);}
+.ww.ok2{background:var(--green);color:#fff;border-color:var(--green);}
+.ww.err2{background:var(--red);color:#fff;border-color:var(--red);}
+.drop{padding:12px 16px;border:2px dashed var(--border);border-radius:8px;min-height:44px;font-size:14px;color:#aaa;margin-bottom:12px;}
+.drop.has{border-style:solid;border-color:var(--blue);color:var(--navy);}
+
+/* MATCH */
+.mgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px;}
+.mcol h5{font-size:10px;color:#7a7a9a;text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px;}
+.mi{padding:8px 12px;border:1px solid var(--border);border-radius:7px;font-size:12.5px;cursor:pointer;background:#fff;transition:all .15s;color:#4a4a6a;}
+.mi:hover{border-color:rgba(43,95,168,0.3);}
+.mi.sel{border-color:var(--blue);background:rgba(43,95,168,0.06);color:var(--blue);}
+.mi.matched{border-color:var(--green);background:rgba(45,106,45,0.06);color:#1a4a1a;}
+.mi.bad{border-color:var(--red);background:rgba(217,79,60,0.06);}
+
+/* EVAL FINAL */
+.ef-card{background:#fff;border:1px solid var(--border);border-radius:12px;padding:20px;}
+.ef-num{font-size:28px;font-weight:700;color:var(--navy);margin-bottom:5px;}
+.ef-card h4{font-size:14px;font-weight:700;color:var(--navy);margin-bottom:5px;}
+.ef-card p{font-size:12.5px;color:#4a4a6a;line-height:1.6;}
+.rub{width:100%;border-collapse:collapse;background:#fff;border-radius:12px;overflow:hidden;border:1px solid var(--border);margin-bottom:24px;}
+.rub th{background:var(--navy);color:#fff;padding:10px 12px;font-size:10.5px;text-transform:uppercase;letter-spacing:.5px;text-align:left;}
+.rub td{padding:10px 12px;font-size:12.5px;border-bottom:1px solid var(--border);color:#4a4a6a;}
+.rub tr:last-child td{border-bottom:none;}
+.rub td:first-child{font-weight:700;color:var(--navy);}
+.pts{background:rgba(201,168,76,0.14);color:#6a4a00;font-size:10px;padding:2px 8px;border-radius:10px;font-weight:700;}
+
+/* RECURSOS */
+.rcard{background:#fff;border:1px solid var(--border);border-radius:10px;padding:14px 16px;margin-bottom:10px;display:flex;gap:12px;align-items:flex-start;}
+.rico{width:36px;height:36px;border-radius:7px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:16px;}
+.ri-b{background:rgba(43,95,168,0.08);}.ri-r{background:rgba(217,79,60,0.07);}.ri-g{background:rgba(201,168,76,0.09);}
+.rcard h4{font-size:13px;font-weight:700;color:var(--navy);margin-bottom:3px;}
+.rcard p{font-size:12px;color:#4a4a6a;line-height:1.5;}
+.rutil{font-size:11px;color:#7a7a9a;margin-top:4px;font-style:italic;}
+.rsec h3{font-size:16px;font-weight:700;color:var(--navy);margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--border);}
+
+/* TEAM */
+.tcard{background:#fff;border:1px solid var(--border);border-radius:12px;padding:20px;text-align:center;}
+.tav{width:60px;height:60px;border-radius:50%;margin:0 auto 10px;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700;}
+.av1{background:rgba(43,95,168,0.1);color:var(--blue);}
+.av2{background:rgba(217,79,60,0.1);color:var(--red);}
+.av3{background:rgba(201,168,76,0.12);color:#7a5a00;}
+.av4{background:rgba(74,32,96,0.1);color:#4a2060;}
+.av5{background:rgba(45,90,45,0.1);color:var(--green);}
+.av6{background:rgba(26,39,68,0.1);color:var(--navy);}
+.tcard h4{font-size:14px;font-weight:700;color:var(--navy);margin-bottom:2px;}
+.trole{font-size:10px;color:#7a7a9a;text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px;}
+.tcard p{font-size:12px;color:#4a4a6a;line-height:1.5;}
+.refbox{background:var(--navy);border-radius:12px;padding:28px;}
+.refbox h3{font-size:18px;color:#fff;font-weight:700;margin-bottom:14px;}
+.refbox p{color:rgba(255,255,255,0.7);font-size:13px;line-height:1.8;}
+.refbox blockquote{border-left:3px solid var(--gold);padding-left:16px;margin:16px 0;font-style:italic;color:rgba(255,255,255,0.65);font-size:14px;line-height:1.7;}
+
+/* GLOSARIO */
+.glos-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:8px;margin-bottom:16px;}
+.gitem{background:#fff;border:1px solid var(--border);border-radius:8px;padding:10px;cursor:pointer;text-align:center;}
+.gitem .gfr{font-weight:700;color:var(--navy);font-size:12.5px;margin-bottom:2px;}
+.gitem .ges{font-size:11.5px;color:var(--blue);margin-top:5px;padding-top:5px;border-top:1px solid var(--border);display:none;}
+.gitem.open .ges{display:block;}
+
+/* EVAL FINAL EXAM */
+.ebox{background:var(--navy);border-radius:12px;padding:24px;margin-bottom:20px;}
+.ebox h3{font-size:18px;color:#fff;font-weight:700;margin-bottom:6px;}
+.ebox>p{color:rgba(255,255,255,0.65);font-size:13px;margin-bottom:18px;}
+.emeta{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:16px;}
+.eitem{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:12px;}
+.elab{font-size:10px;color:rgba(255,255,255,0.35);text-transform:uppercase;letter-spacing:.5px;margin-bottom:3px;}
+.eitem p{font-size:13px;color:rgba(255,255,255,0.82);}
+
+.write-area{width:100%;border:1px solid var(--border);border-radius:8px;padding:12px;font-size:13px;font-family:Arial,sans-serif;color:var(--navy);resize:vertical;min-height:110px;background:#fff;}
+.rlink{display:inline-flex;align-items:center;gap:4px;margin-top:9px;font-size:11.5px;color:var(--blue);text-decoration:none;font-weight:700;border:1px solid rgba(43,95,168,0.25);padding:4px 10px;border-radius:6px;}
+.rlink:hover{background:rgba(43,95,168,0.06);}
+.vtitle{font-size:13px;font-weight:700;color:var(--navy);margin:8px 0 2px;}
+.vsub{font-size:11.5px;color:#7a7a9a;margin-bottom:10px;}
+.yt-wrap{border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:14px;text-decoration:none;display:block;}
+.yt-thumb{background:var(--navy);height:150px;display:flex;align-items:center;justify-content:center;position:relative;cursor:pointer;}
+.yt-thumb::before{content:'▶';width:52px;height:52px;background:#ff0000;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;color:#fff;line-height:52px;text-align:center;}
+.yt-thumb:hover::before{background:#cc0000;transform:scale(1.08);transition:all .15s;}
+.yt-thumb span{position:absolute;bottom:10px;left:14px;font-size:10px;color:rgba(255,255,255,0.5);letter-spacing:.5px;text-transform:uppercase;}
+.yt-info{background:#fff;padding:12px 14px;display:flex;align-items:center;gap:10px;}
+.yt-logo{background:#ff0000;color:#fff;font-size:9px;font-weight:700;padding:3px 7px;border-radius:4px;flex-shrink:0;letter-spacing:.3px;}
+.yt-info p{font-size:12px;color:#4a4a6a;line-height:1.4;margin:0;}
+.grid2c{display:grid;grid-template-columns:1fr 1fr;gap:20px;max-width:680px;margin:0 auto 24px;}
+</style>
+</head>
+<body>
+
+<aside>
+  <div class="logo">
+    <div class="flag"><span class="fb"></span><span class="fw"></span><span class="fr"></span></div>
+    <h1>Le Français Vivant</h1>
+    <small>Bachillerato · Francés</small>
+  </div>
+  <div class="nlab">Plataforma</div>
+  <button class="nl active" onclick="go('home')">🏠 Inicio</button>
+  <div class="nlab">Lecciones</div>
+  <button class="nl" onclick="go('l1')">① Les Présentations</button>
+  <button class="nl" onclick="go('l2')">② La Vie Quotidienne</button>
+  <button class="nl" onclick="go('l3')">③ La Culture Française</button>
+  <div class="nlab">Evaluación</div>
+  <button class="nl" onclick="go('efinal')">📋 Evaluación Final</button>
+  <div class="nlab">Más</div>
+  <button class="nl" onclick="go('recursos')">📁 Recursos Generales</button>
+  <button class="nl" onclick="go('equipo')">👥 Sobre el Equipo</button>
+</aside>
+
+<main>
+
+<!-- HOME -->
+<div class="sec active" id="home">
+  <div class="hero navy">
+    <div class="badge">Plataforma Educativa · Preparatoria</div>
+    <h2>Aprende <em>Français</em><br>con propósito</h2>
+    <p>Curso completo de francés A1–A2. Todo el contenido, actividades y evaluaciones funcionan dentro de esta plataforma.</p>
+    <div class="chips">
+      <span class="chip">🎯 Nivel A1–A2 MCER</span>
+      <span class="chip">📚 3 Lecciones</span>
+      <span class="chip">🎮 Actividades integradas</span>
+      <span class="chip">⏱️ ~12 horas</span>
+    </div>
+  </div>
+  <div class="content">
+    <div class="grid3">
+      <div class="card"><div class="card-icon">🎯</div><h3>Objetivo General</h3><p>Desarrollar competencias comunicativas básicas en francés A1–A2: presentarse, describir la vida cotidiana e identificar la cultura francófona.</p></div>
+      <div class="card"><div class="card-icon">👤</div><h3>Público Objetivo</h3><p>Estudiantes de preparatoria de 15–18 años que inician en el francés. No se requieren conocimientos previos del idioma.</p></div>
+      <div class="card"><div class="card-icon">📐</div><h3>Metodología</h3><p>Enfoque comunicativo con actividades interactivas, gamificación, producción escrita y evaluaciones integradas en la plataforma.</p></div>
+    </div>
+    <div class="grid3" style="margin-bottom:28px;">
+      <div class="lcard lc1" onclick="go('l1')"><div class="lbar"></div><div class="lbody"><div class="lnum">Lección 1</div><h4>Les Présentations</h4><p>Saludos, identidad, números y el alfabeto francés.</p><div class="tags"><span class="tag">Saludos</span><span class="tag">Identidad</span><span class="tag">Números</span></div></div></div>
+      <div class="lcard lc2" onclick="go('l2')"><div class="lbar"></div><div class="lbody"><div class="lnum">Lección 2</div><h4>La Vie Quotidienne</h4><p>Rutinas diarias, verbos -ER, horas y días de la semana.</p><div class="tags"><span class="tag">Verbos -ER</span><span class="tag">Rutinas</span><span class="tag">Horas</span></div></div></div>
+      <div class="lcard lc3" onclick="go('l3')"><div class="lbar"></div><div class="lbody"><div class="lnum">Lección 3</div><h4>La Culture Française</h4><p>Gastronomía, arte, fiestas y el mundo francófono.</p><div class="tags"><span class="tag">Gastronomía</span><span class="tag">Arte</span><span class="tag">Francofonie</span></div></div></div>
+    </div>
+    <div class="instbox">
+      <h3>📖 Cómo usar esta plataforma</h3>
+      <div class="instgrid">
+        <div class="instcol"><h4>Navegación</h4>
+          <div class="istep"><div class="inum">1</div><p>Usa el menú lateral para moverte entre secciones.</p></div>
+          <div class="istep"><div class="inum">2</div><p>Cada lección tiene 5 pestañas: Intro, Contenido, Recursos, Actividades, Evaluación.</p></div>
+          <div class="istep"><div class="inum">3</div><p>Sigue el orden L1 → L2 → L3 antes del examen final.</p></div>
+        </div>
+        <div class="instcol"><h4>Actividades</h4>
+          <div class="istep"><div class="inum">4</div><p>Todas las actividades y quizzes funcionan dentro de esta página.</p></div>
+          <div class="istep"><div class="inum">5</div><p>Completa todas las actividades de cada lección.</p></div>
+          <div class="istep"><div class="inum">6</div><p>La evaluación final integra las 3 lecciones. ¡Bon courage!</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- LECCIÓN 1 -->
+<div class="sec" id="l1">
+  <div class="lhdr"><div class="bread">Lección 1 de 3</div><h2>Les Présentations</h2><p>Saludos, presentación personal, números y alfabeto francés.</p></div>
+  <div class="tabs">
+    <button class="tab active" onclick="tab('l1','in')">🟡 Introducción</button>
+    <button class="tab" onclick="tab('l1','co')">🔵 Contenido</button>
+    <button class="tab" onclick="tab('l1','re')">🟢 Recursos</button>
+    <button class="tab" onclick="tab('l1','ac')">🟣 Actividades</button>
+    <button class="tab" onclick="tab('l1','ev')">🔴 Evaluación</button>
+  </div>
+  <div class="tbody">
+
+    <div class="tp active" id="l1-in">
+      <div class="stitle">Introducción</div><div class="ssub">Activación de conocimientos previos</div>
+      <div class="ibox"><h4>Presentación del tema</h4><p>Aprenderás los elementos esenciales para presentarte en francés: saludar, decir tu nombre, edad y nacionalidad. El francés lo hablan más de 300 millones de personas en 84 países. ¡Commençons!</p></div>
+      <div class="ibox"><h4>¿Qué sabes ya del francés?</h4><p>Probablemente conoces palabras como: bonjour, merci, café, croissant… Esta lección construye sobre ese conocimiento intuitivo que ya tienes.</p></div>
+      <div class="acard">
+        <div class="ahdr ahdr-b"><span class="abadge ab-b">💬 Pregunta detonadora</span><h4>¿Cuánto sabes de Francia?</h4></div>
+        <div class="abody">
+          <p>Responde estas preguntas de reflexión antes de comenzar. No hay respuestas incorrectas.</p>
+          <div id="det1"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tp" id="l1-co">
+      <div class="stitle">Contenido</div><div class="ssub">Vocabulario esencial y estructuras de presentación</div>
+      <div class="grid2">
+        <div class="card"><h3>Les salutations</h3>
+          <table class="vtable"><tr><th>Français</th><th>Español</th><th>Uso</th></tr>
+            <tr><td>Bonjour</td><td>Buenos días</td><td>Formal</td></tr>
+            <tr><td>Bonsoir</td><td>Buenas noches</td><td>Tarde-noche</td></tr>
+            <tr><td>Salut</td><td>Hola / Chau</td><td>Informal</td></tr>
+            <tr><td>Au revoir</td><td>Adiós</td><td>Formal</td></tr>
+            <tr><td>Ça va?</td><td>¿Cómo estás?</td><td>Informal</td></tr>
+            <tr><td>Comment allez-vous?</td><td>¿Cómo está usted?</td><td>Formal</td></tr>
+          </table>
+        </div>
+        <div class="card"><h3>Se présenter</h3>
+          <table class="vtable"><tr><th>Phrase</th><th>Traduction</th></tr>
+            <tr><td>Je m'appelle…</td><td>Me llamo…</td></tr>
+            <tr><td>J'ai … ans</td><td>Tengo … años</td></tr>
+            <tr><td>Je suis mexicain(e)</td><td>Soy mexicano/a</td></tr>
+            <tr><td>J'habite à…</td><td>Vivo en…</td></tr>
+            <tr><td>Je suis étudiant(e)</td><td>Soy estudiante</td></tr>
+            <tr><td>Enchanté(e)</td><td>Mucho gusto</td></tr>
+          </table>
+        </div>
+      </div>
+      <div class="grid2">
+        <div class="card"><h3>Les chiffres 0–20</h3><p>zéro · un · deux · trois · quatre · cinq · six · sept · huit · neuf · dix · onze · douze · treize · quatorze · quinze · seize · dix-sept · dix-huit · dix-neuf · vingt</p></div>
+        <div class="card"><h3>Fonética esencial</h3><p><b style="color:var(--blue)">É</b> (accent aigu) → sonido cerrado: café<br><b style="color:var(--blue)">È/Ê</b> → sonido abierto: très, fête<br><b style="color:var(--blue)">Ç</b> → suena "s": français<br><b style="color:var(--blue)">Liaison</b>: "les amis" → /lez ami/</p></div>
+      </div>
+    </div>
+
+    <div class="tp" id="l1-re">
+      <div class="stitle">Recursos</div><div class="ssub">Flashcards de vocabulario y material de apoyo</div>
+      <p style="font-size:13px;color:#4a4a6a;margin-bottom:12px;">Haz clic en cada tarjeta para ver la traducción. Navega con los botones.</p>
+      <div class="fc-wrap" id="fc1" onclick="flipFC(1)">
+        <div class="fc-inner">
+          <div class="fc-f"><div class="fc-word" id="fc1w">Bonjour</div><div class="fc-hint">Clic para ver traducción</div></div>
+          <div class="fc-b"><div class="fc-word" id="fc1e">Buenos días / Buenas tardes</div><div class="fc-hint" id="fc1h">Uso formal y general</div></div>
+        </div>
+      </div>
+      <div class="fc-nav">
+        <button class="btn btn-s" onclick="navFC(1,-1)" style="padding:6px 14px;font-size:12px;">← Anterior</button>
+        <span class="fc-cnt" id="fc1c">1 / 10</span>
+        <button class="btn btn-s" onclick="navFC(1,1)" style="padding:6px 14px;font-size:12px;">Siguiente →</button>
+      </div>
+      <div class="hr"></div>
+      <div class="ibox"><h4>Países francófonos</h4><p>🇫🇷 France · 🇧🇪 Belgique · 🇨🇭 Suisse · 🇨🇦 Canada · 🇸🇳 Sénégal · 🇲🇦 Maroc · 🇩🇿 Algérie · 🇭🇹 Haïti · 🇨🇩 Congo — <b>84 países y regiones, 300+ millones de hablantes.</b></p></div>
+      <div class="ibox"><h4>Guía de pronunciación</h4><p><b style="color:var(--blue)">OU</b> → "u" española: vous, bonjour &nbsp;|&nbsp; <b style="color:var(--blue)">U</b> → labios en "o", lengua en "i": tu, musique<br><b style="color:var(--blue)">R</b> → uvular (garganta), no vibrante &nbsp;|&nbsp; <b style="color:var(--blue)">H</b> → siempre muda: heure, homme<br>Consonantes finales → generalmente mudas: vous, ils, <b>excepto</b> -r, -l, -f, -c</p></div>
+      <div class="hr"></div>
+      <div class="vtitle">📺 Videos de apoyo — Lección 1</div>
+      <div class="vsub">Haz clic para ver en YouTube</div>
+      <div class="grid2">
+        <a class="yt-wrap" href="https://www.youtube.com/results?search_query=saludos+en+frances+A1+bonjour+salut+bonsoir" target="_blank">
+          <div class="yt-thumb"><span>Les salutations · A1</span></div>
+          <div class="yt-info"><span class="yt-logo">YouTube</span><p>Saludos formales e informales en francés — pronunciación y uso real</p></div>
+        </a>
+        <a class="yt-wrap" href="https://www.youtube.com/results?search_query=presentarse+en+frances+je+m+appelle+j+ai+ans" target="_blank">
+          <div class="yt-thumb"><span>Se présenter · A1</span></div>
+          <div class="yt-info"><span class="yt-logo">YouTube</span><p>Cómo presentarte en francés: nombre, edad, ciudad y más</p></div>
+        </a>
+      </div>
+    </div>
+
+    <div class="tp" id="l1-ac">
+      <div class="stitle">Actividades</div><div class="ssub">Interactividad, colaboración y gamificación</div>
+      <div class="acard">
+        <div class="ahdr ahdr-b"><span class="abadge ab-b">✏️ Actividad 1 — Interactividad</span><h4>¿Formal o Informal?</h4></div>
+        <div class="abody"><p>Clasifica cada expresión. Haz clic en <b>Formal</b> o <b>Informal</b>.</p><div id="act1a"></div></div>
+      </div>
+      <div class="acard">
+        <div class="ahdr ahdr-g"><span class="abadge ab-g">🤝 Actividad 2 — Colaboración</span><h4>Mural: "Bonjour, je m'appelle…"</h4></div>
+        <div class="abody">
+          <p>Crea tu tarjeta de presentación en francés y publícala en el mural del grupo.</p>
+          <div class="mini-form" style="max-width:380px;margin-bottom:14px;">
+            <label>Nombre (Je m'appelle…)</label><input id="m1n" placeholder="Tu nombre">
+            <label>Edad (J'ai … ans)</label><input id="m1a" type="number" placeholder="Tu edad" min="14" max="25">
+            <label>Ciudad (J'habite à…)</label><input id="m1c" placeholder="Tu ciudad">
+            <label>Algo que te gusta (J'aime…)</label><input id="m1l" placeholder="J'aime…">
+          </div>
+          <button class="btn btn-g" onclick="postMural(1)">Publicar en el mural</button>
+          <div class="hr"></div>
+          <div class="mural-bg" id="mural1"><p style="font-size:12.5px;color:#7a7a9a;">Aún no hay tarjetas. ¡Sé el primero!</p></div>
+        </div>
+      </div>
+      <div class="acard">
+        <div class="ahdr ahdr-r"><span class="abadge ab-r">🎮 Actividad 3 — Gamificación</span><h4>Ordena la frase de presentación</h4></div>
+        <div class="abody"><p>Haz clic en las palabras en el orden correcto para construir la oración.</p><div id="act1c"></div></div>
+      </div>
+    </div>
+
+    <div class="tp" id="l1-ev">
+      <div class="stitle">Evaluación — Lección 1</div><div class="ssub">Quiz de 10 preguntas sobre saludos, presentación y números</div>
+      <div id="qz1"></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- LECCIÓN 2 -->
+<div class="sec" id="l2">
+  <div class="lhdr"><div class="bread">Lección 2 de 3</div><h2>La Vie Quotidienne</h2><p>Rutinas diarias, verbos -ER, horas y días de la semana.</p></div>
+  <div class="tabs">
+    <button class="tab active" onclick="tab('l2','in')">🟡 Introducción</button>
+    <button class="tab" onclick="tab('l2','co')">🔵 Contenido</button>
+    <button class="tab" onclick="tab('l2','re')">🟢 Recursos</button>
+    <button class="tab" onclick="tab('l2','ac')">🟣 Actividades</button>
+    <button class="tab" onclick="tab('l2','ev')">🔴 Evaluación</button>
+  </div>
+  <div class="tbody">
+
+    <div class="tp active" id="l2-in">
+      <div class="stitle">Introducción</div><div class="ssub">Activación de conocimientos y contextualización</div>
+      <div class="ibox"><h4>Presentación del tema</h4><p>Aprenderemos vocabulario y estructuras para describir la vida diaria en francés: actividades de mañana, tarde y noche, verbos del grupo -ER y cómo decir la hora y los días de la semana.</p></div>
+      <div class="ibox"><h4>Contraste cultural: el lycéen français</h4><p>Un estudiante francés se levanta a las 7h, va al lycée de 8h a 17h y tiene una pausa larga al mediodía (la "pause déjeuner" de 1–2 horas). ¿En qué se parece y diferencia de tu rutina?</p></div>
+      <div class="acard">
+        <div class="ahdr ahdr-b"><span class="abadge ab-b">💬 Pregunta detonadora</span><h4>Mi rutina en 5 actividades</h4></div>
+        <div class="abody">
+          <p>Escribe las 5 actividades más importantes de tu rutina diaria en español. Luego las aprenderás en francés.</p>
+          <div class="mini-form" style="max-width:380px;margin-bottom:14px;">
+            <label>Actividad 1 – mañana</label><input id="r1" placeholder="Ej: Me levanto a las 7am">
+            <label>Actividad 2 – mañana</label><input id="r2" placeholder="Ej: Desayuno">
+            <label>Actividad 3 – tarde</label><input id="r3" placeholder="Ej: Almuerzo">
+            <label>Actividad 4 – tarde</label><input id="r4" placeholder="Ej: Estudio">
+            <label>Actividad 5 – noche</label><input id="r5" placeholder="Ej: Ceno y duermo">
+          </div>
+          <button class="btn btn-n" onclick="tab('l2','co')">Guardar y continuar →</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="tp" id="l2-co">
+      <div class="stitle">Contenido</div><div class="ssub">Verbos -ER, rutinas diarias, horas y días</div>
+      <div class="grid2">
+        <div class="card"><h3>Verbos -ER — Presente</h3>
+          <table class="vtable"><tr><th>Pronom</th><th>MANGER</th><th>PARLER</th></tr>
+            <tr><td>Je</td><td>mange</td><td>parle</td></tr>
+            <tr><td>Tu</td><td>manges</td><td>parles</td></tr>
+            <tr><td>Il/Elle</td><td>mange</td><td>parle</td></tr>
+            <tr><td>Nous</td><td>mangeons</td><td>parlons</td></tr>
+            <tr><td>Vous</td><td>mangez</td><td>parlez</td></tr>
+            <tr><td>Ils/Elles</td><td>mangent</td><td>parlent</td></tr>
+          </table>
+        </div>
+        <div class="card"><h3>La routine quotidienne</h3>
+          <table class="vtable"><tr><th>Activité</th><th>Español</th></tr>
+            <tr><td>Se réveiller</td><td>Despertar</td></tr>
+            <tr><td>Se lever</td><td>Levantarse</td></tr>
+            <tr><td>Prendre le petit-déjeuner</td><td>Desayunar</td></tr>
+            <tr><td>Aller à l'école</td><td>Ir a la escuela</td></tr>
+            <tr><td>Déjeuner</td><td>Almorzar</td></tr>
+            <tr><td>Rentrer à la maison</td><td>Regresar a casa</td></tr>
+            <tr><td>Dîner</td><td>Cenar</td></tr>
+            <tr><td>Se coucher</td><td>Acostarse</td></tr>
+          </table>
+        </div>
+      </div>
+      <div class="grid2">
+        <div class="card"><h3>Quelle heure est-il?</h3>
+          <p>Il est <b style="color:var(--blue)">trois heures</b> (3:00)<br>Il est <b style="color:var(--blue)">trois heures et demie</b> (3:30)<br>Il est <b style="color:var(--blue)">cinq heures et quart</b> (5:15)<br>Il est <b style="color:var(--blue)">neuf heures moins le quart</b> (8:45)<br><span style="font-size:11.5px;color:#7a7a9a;">Francia usa formato 24h: 14h00, 20h30</span></p>
+        </div>
+        <div class="card"><h3>Les jours + adverbes</h3>
+          <p>Lundi · Mardi · Mercredi · Jeudi · Vendredi · Samedi · Dimanche</p>
+          <p style="margin-top:8px;"><b style="color:var(--blue)">toujours</b> siempre · <b style="color:var(--blue)">souvent</b> frecuente · <b style="color:var(--blue)">parfois</b> a veces · <b style="color:var(--blue)">jamais</b> nunca</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="tp" id="l2-re">
+      <div class="stitle">Recursos</div><div class="ssub">Flashcards de verbos y material de apoyo</div>
+      <div class="fc-wrap" id="fc2" onclick="flipFC(2)">
+        <div class="fc-inner">
+          <div class="fc-f"><div class="fc-word" id="fc2w">Se lever</div><div class="fc-hint">Clic para traducción</div></div>
+          <div class="fc-b"><div class="fc-word" id="fc2e">Levantarse</div><div class="fc-hint" id="fc2h">Je me lève à 7 heures</div></div>
+        </div>
+      </div>
+      <div class="fc-nav">
+        <button class="btn btn-s" onclick="navFC(2,-1)" style="padding:6px 14px;font-size:12px;">← Anterior</button>
+        <span class="fc-cnt" id="fc2c">1 / 10</span>
+        <button class="btn btn-s" onclick="navFC(2,1)" style="padding:6px 14px;font-size:12px;">Siguiente →</button>
+      </div>
+      <div class="hr"></div>
+      <div class="ibox"><h4>Horario típico de un lycéen</h4><p>7h00 Levantarse · 7h30 Desayunar · 8h00–12h00 Clases · 12h00–14h00 Pause déjeuner · 14h00–17h00 Clases · 17h00 Regresar a casa · 19h30 Cenar en familia · 22h00 Acostarse</p></div>
+      <div class="ibox"><h4>Verbos -ER más usados</h4><p><b style="color:var(--blue)">parler</b> hablar · <b style="color:var(--blue)">écouter</b> escuchar · <b style="color:var(--blue)">regarder</b> mirar · <b style="color:var(--blue)">travailler</b> trabajar · <b style="color:var(--blue)">manger</b> comer · <b style="color:var(--blue)">habiter</b> vivir · <b style="color:var(--blue)">aimer</b> amar/gustar · <b style="color:var(--blue)">étudier</b> estudiar</p><p style="margin-top:8px;">Regla: Raíz + <b>-e / -es / -e / -ons / -ez / -ent</b></p></div>
+      <div class="hr"></div>
+      <div class="vtitle">📺 Videos de apoyo — Lección 2</div>
+      <div class="vsub">Haz clic para ver en YouTube</div>
+      <div class="grid2">
+        <a class="yt-wrap" href="https://www.youtube.com/results?search_query=conjugacion+verbos+ER+frances+presente+manger+parler" target="_blank">
+          <div class="yt-thumb"><span>Verbos -ER · A1</span></div>
+          <div class="yt-info"><span class="yt-logo">YouTube</span><p>Conjugación de verbos -ER en presente con ejemplos cotidianos</p></div>
+        </a>
+        <a class="yt-wrap" href="https://www.youtube.com/results?search_query=rutina+diaria+en+frances+quelle+heure+est+il" target="_blank">
+          <div class="yt-thumb"><span>La routine · A1</span></div>
+          <div class="yt-info"><span class="yt-logo">YouTube</span><p>Rutinas diarias y cómo decir la hora en francés</p></div>
+        </a>
+      </div>
+    </div>
+
+    <div class="tp" id="l2-ac">
+      <div class="stitle">Actividades</div><div class="ssub">Interactividad, colaboración y gamificación</div>
+      <div class="acard">
+        <div class="ahdr ahdr-b"><span class="abadge ab-b">✏️ Actividad 1 — Interactividad</span><h4>Emparejamiento: actividad y hora</h4></div>
+        <div class="abody"><p>Une cada actividad de la rutina con el momento del día correcto.</p><div id="act2a"></div></div>
+      </div>
+      <div class="acard">
+        <div class="ahdr ahdr-g"><span class="abadge ab-g">🤝 Actividad 2 — Colaboración</span><h4>Redacta la rutina de Pierre</h4></div>
+        <div class="abody">
+          <p>Escribe la rutina diaria de un estudiante ficticio llamado <b>Pierre</b> usando mínimo 6 actividades con horarios en francés.</p>
+          <div class="mini-form" style="max-width:420px;margin-bottom:12px;">
+            <label>Tu nombre</label><input id="m2n" placeholder="Tu nombre">
+            <label>Rutina de Pierre en francés (mín. 6 actividades)</label>
+            <textarea id="m2t" oninput="wc('m2t','m2wc')" placeholder="À 7h00, Pierre se lève. Il prend le petit-déjeuner à 7h30..."></textarea>
+            <div class="wc" id="m2wc">0 palabras</div>
+          </div>
+          <button class="btn btn-g" onclick="postMural(2)">Publicar rutina</button>
+          <div class="hr"></div>
+          <div class="mural-bg" id="mural2"><p style="font-size:12.5px;color:#7a7a9a;">Aún no hay rutinas publicadas.</p></div>
+        </div>
+      </div>
+      <div class="acard">
+        <div class="ahdr ahdr-r"><span class="abadge ab-r">🎮 Actividad 3 — Gamificación</span><h4>Conjuga el verbo — 3 vidas</h4></div>
+        <div class="abody"><p>Elige la conjugación correcta. Tienes 3 vidas ❤️❤️❤️</p><div id="act2c"></div></div>
+      </div>
+    </div>
+
+    <div class="tp" id="l2-ev">
+      <div class="stitle">Evaluación — Lección 2</div><div class="ssub">Quiz de 10 preguntas sobre verbos -ER, rutinas y tiempo</div>
+      <div id="qz2"></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- LECCIÓN 3 -->
+<div class="sec" id="l3">
+  <div class="lhdr"><div class="bread">Lección 3 de 3</div><h2>La Culture Française</h2><p>Gastronomía, arte, fiestas nacionales y el mundo francófono.</p></div>
+  <div class="tabs">
+    <button class="tab active" onclick="tab('l3','in')">🟡 Introducción</button>
+    <button class="tab" onclick="tab('l3','co')">🔵 Contenido</button>
+    <button class="tab" onclick="tab('l3','re')">🟢 Recursos</button>
+    <button class="tab" onclick="tab('l3','ac')">🟣 Actividades</button>
+    <button class="tab" onclick="tab('l3','ev')">🔴 Evaluación</button>
+  </div>
+  <div class="tbody">
+
+    <div class="tp active" id="l3-in">
+      <div class="stitle">Introducción</div><div class="ssub">Activación de conocimientos culturales previos</div>
+      <div class="ibox"><h4>Presentación del tema</h4><p>Exploraremos la riqueza cultural francófona: gastronomía (¡Patrimonio UNESCO!), arte, fiestas nacionales y la diversidad del mundo francófono. La cultura es inseparable del idioma.</p></div>
+      <div class="ibox"><h4>Francia más allá de la Torre Eiffel</h4><p>Francia es el país más visitado del mundo (90M turistas/año). Pero la cultura francófona va mucho más allá: desde el carnaval de Québec hasta la música sabar de Senegal. Esta lección amplía tu visión del idioma.</p></div>
+      <div class="acard">
+        <div class="ahdr ahdr-b"><span class="abadge ab-b">💬 Pregunta detonadora</span><h4>Lo que sé de Francia</h4></div>
+        <div class="abody">
+          <p>Escribe lo primero que asocias con Francia en cada categoría y genera tu nube de palabras.</p>
+          <div class="mini-form" style="max-width:380px;margin-bottom:12px;">
+            <label>Una comida francesa</label><input id="c1" placeholder="Ej: croissant">
+            <label>Un lugar o monumento</label><input id="c2" placeholder="Ej: Torre Eiffel">
+            <label>Un artista o escritor francés</label><input id="c3" placeholder="Ej: Victor Hugo">
+            <label>Una palabra en francés que ya sabías</label><input id="c4" placeholder="Ej: bonjour">
+          </div>
+          <button class="btn btn-n" onclick="showCloud()">Ver mi nube de palabras</button>
+          <div id="cloudout" style="display:none;margin-top:12px;"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tp" id="l3-co">
+      <div class="stitle">Contenido</div><div class="ssub">Gastronomía, arte, fiestas y geografía francófona</div>
+      <div class="grid2">
+        <div class="card"><h3>La gastronomie française</h3>
+          <table class="vtable"><tr><th>Plat / Aliment</th><th>Español</th></tr>
+            <tr><td>Le croissant</td><td>El croissant</td></tr>
+            <tr><td>La baguette</td><td>Pan baguette</td></tr>
+            <tr><td>Le fromage</td><td>El queso (+1,200 tipos)</td></tr>
+            <tr><td>La quiche lorraine</td><td>Quiche lorraine</td></tr>
+            <tr><td>Le coq au vin</td><td>Pollo al vino</td></tr>
+            <tr><td>Les crêpes</td><td>Las crepas</td></tr>
+            <tr><td>La soupe à l'oignon</td><td>Sopa de cebolla</td></tr>
+            <tr><td>Le macaron</td><td>El macarrón</td></tr>
+          </table>
+        </div>
+        <div class="card"><h3>L'art et la culture</h3>
+          <table class="vtable"><tr><th>Domaine</th><th>Exemples</th></tr>
+            <tr><td>Peinture</td><td>Monet, Renoir, Degas</td></tr>
+            <tr><td>Architecture</td><td>Tour Eiffel, Louvre</td></tr>
+            <tr><td>Littérature</td><td>Victor Hugo, Voltaire</td></tr>
+            <tr><td>Cinéma</td><td>Festival de Cannes</td></tr>
+            <tr><td>Mode</td><td>Chanel, Dior, Hermès</td></tr>
+            <tr><td>Musique</td><td>Édith Piaf, Daft Punk</td></tr>
+          </table>
+        </div>
+      </div>
+      <div class="grid2">
+        <div class="card"><h3>Les fêtes nationales</h3>
+          <p><b style="color:var(--blue)">14 juillet</b> — Fête Nationale: Revolución Francesa 1789. Desfile en los Campos Elíseos y fuegos artificiales en la Torre Eiffel.</p>
+          <p style="margin-top:6px;"><b style="color:var(--blue)">2 février — La Chandeleur</b>: Fiesta de las crepas. Se lanzan al aire sosteniendo una moneda.</p>
+          <p style="margin-top:6px;"><b style="color:var(--blue)">21 juin — Fête de la Musique</b>: Conciertos gratuitos en todo el país.</p>
+        </div>
+        <div class="card"><h3>La Francophonie</h3>
+          <p>84 países y regiones · 300M hablantes</p>
+          <p style="margin-top:6px;">🇪🇺 France, Belgique, Suisse<br>🌍 Sénégal, Maroc, Algérie, Mali<br>🌎 Canada (Québec), Haïti<br>🌏 Viêt Nam, Liban</p>
+          <p style="margin-top:6px;font-size:11.5px;color:#7a7a9a;">El francés tiene acentos regionales distintos igual que el español.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="tp" id="l3-re">
+      <div class="stitle">Recursos</div><div class="ssub">Flashcards de cultura y material de apoyo</div>
+      <div class="fc-wrap" id="fc3" onclick="flipFC(3)">
+        <div class="fc-inner">
+          <div class="fc-f"><div class="fc-word" id="fc3w">Le 14 juillet</div><div class="fc-hint">¿Qué es esta fecha?</div></div>
+          <div class="fc-b"><div class="fc-word" style="font-size:18px;" id="fc3e">Fête Nationale</div><div class="fc-hint" id="fc3h">Conmemora la Revolución Francesa de 1789</div></div>
+        </div>
+      </div>
+      <div class="fc-nav">
+        <button class="btn btn-s" onclick="navFC(3,-1)" style="padding:6px 14px;font-size:12px;">← Anterior</button>
+        <span class="fc-cnt" id="fc3c">1 / 10</span>
+        <button class="btn btn-s" onclick="navFC(3,1)" style="padding:6px 14px;font-size:12px;">Siguiente →</button>
+      </div>
+      <div class="hr"></div>
+      <div class="ibox"><h4>Receta en français: Comment faire des crêpes</h4><p><b style="color:var(--blue)">Ingrédients</b> (8 crêpes): 250g farine · 2 oeufs · 500ml lait · 1 pincée sel · 1 c.à.s. beurre fondu<br><b style="color:var(--blue)">Préparation</b>: 1. Mélangez farine et oeufs. 2. Ajoutez le lait progressivement. 3. Ajoutez sel et beurre. 4. Reposez 30min. 5. Faites cuire dans une poêle beurrée.<br><span style="font-size:11.5px;color:#7a7a9a;">mélanger=mezclar · ajouter=agregar · faire cuire=cocinar · la farine=harina</span></p></div>
+      <div class="ibox"><h4>La France en chiffres</h4><p>🗺️ 551,500 km² · 👥 67M habitantes · 🌍 5ª economía mundial · 🏖️ 90M turistas/año (país más visitado del mundo) · 🧀 +1,200 tipos de queso · 🥖 30,000 boulangeries · 🎬 Festival de Cannes desde 1946 · 🖼️ Louvre: +480,000 obras · 🌐 300M+ francófonos</p></div>
+      <div class="hr"></div>
+      <div class="vtitle">📺 Videos de apoyo — Lección 3</div>
+      <div class="vsub">Haz clic para ver en YouTube</div>
+      <div class="grid2">
+        <a class="yt-wrap" href="https://www.youtube.com/results?search_query=gastronomia+francesa+croissant+baguette+fromage+documental" target="_blank">
+          <div class="yt-thumb"><span>Gastronomie française · A1</span></div>
+          <div class="yt-info"><span class="yt-logo">YouTube</span><p>La gastronomía francesa: historia, platos típicos y por qué es Patrimonio UNESCO</p></div>
+        </a>
+        <a class="yt-wrap" href="https://www.youtube.com/results?search_query=14+juillet+fete+nationale+france+bastille+tour+eiffel" target="_blank">
+          <div class="yt-thumb"><span>Culture française · A1</span></div>
+          <div class="yt-info"><span class="yt-logo">YouTube</span><p>La Fête Nationale del 14 juillet, el Louvre y los símbolos de Francia</p></div>
+        </a>
+      </div>
+    </div>
+
+    <div class="tp" id="l3-ac">
+      <div class="stitle">Actividades</div><div class="ssub">Interactividad, colaboración y gamificación</div>
+      <div class="acard">
+        <div class="ahdr ahdr-b"><span class="abadge ab-b">✏️ Actividad 1 — Interactividad</span><h4>Quiz cultural: gastronomía y arte</h4></div>
+        <div class="abody"><p>Responde preguntas sobre la cultura francesa. Retroalimentación inmediata.</p><div id="act3a"></div></div>
+      </div>
+      <div class="acard">
+        <div class="ahdr ahdr-g"><span class="abadge ab-g">🤝 Actividad 2 — Colaboración</span><h4>Guía turística: "Mon pays francophone"</h4></div>
+        <div class="abody">
+          <p>Elige un país francófono y escribe una guía turística breve en francés.</p>
+          <div class="mini-form" style="max-width:420px;margin-bottom:12px;">
+            <label>Tu nombre</label><input id="m3n" placeholder="Tu nombre">
+            <label>País elegido</label>
+            <select id="m3p"><option>Elige un país…</option><option>🇫🇷 France</option><option>🇧🇪 Belgique</option><option>🇨🇦 Canada (Québec)</option><option>🇸🇳 Sénégal</option><option>🇲🇦 Maroc</option><option>🇭🇹 Haïti</option><option>🇨🇭 Suisse</option><option>🇩🇿 Algérie</option></select>
+            <label>Tu guía en francés</label>
+            <textarea id="m3t" oninput="wc('m3t','m3wc')" placeholder="Bienvenue en… Ce pays est célèbre pour… La gastronomie typique est…"></textarea>
+            <div class="wc" id="m3wc">0 palabras</div>
+          </div>
+          <button class="btn btn-g" onclick="postMural(3)">Publicar guía</button>
+          <div class="hr"></div>
+          <div class="mural-bg" id="mural3"><p style="font-size:12.5px;color:#7a7a9a;">Aún no hay guías publicadas.</p></div>
+        </div>
+      </div>
+      <div class="acard">
+        <div class="ahdr ahdr-r"><span class="abadge ab-r">🎮 Actividad 3 — Trivia cultural</span><h4>¿Quién sabe más de Francia? — 15 preguntas</h4></div>
+        <div class="abody"><p>Quiz de trivia con puntuación. ¡A competir!</p><div id="act3c"></div></div>
+      </div>
+    </div>
+
+    <div class="tp" id="l3-ev">
+      <div class="stitle">Evaluación — Lección 3</div><div class="ssub">Quiz de 10 preguntas sobre cultura, gastronomía y el mundo francófono</div>
+      <div id="qz3"></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- EVALUACIÓN FINAL -->
+<div class="sec" id="efinal">
+  <div class="hero red2"><h2>Évaluation Finale</h2><p>Examen integrador de las 3 lecciones. Demuestra todo lo que aprendiste.</p></div>
+  <div class="content">
+    <div class="grid2" style="margin-bottom:24px;">
+      <div class="ef-card"><div class="ef-num">40%</div><h4>Parte 1 — Examen integrador</h4><p>25 reactivos de opción múltiple cubriendo vocabulario, gramática y cultura de las 3 lecciones.</p></div>
+      <div class="ef-card"><div class="ef-num">30%</div><h4>Parte 2 — Producción escrita</h4><p>Redacta 100–150 palabras presentando un personaje francófono con su rutina y datos culturales.</p></div>
+      <div class="ef-card"><div class="ef-num">20%</div><h4>Parte 3 — Producción oral</h4><p>Prepara una presentación de 2 min en francés sobre un país francófono. Se evalúa en clase.</p></div>
+      <div class="ef-card"><div class="ef-num">10%</div><h4>Parte 4 — Autoevaluación</h4><p>Reflexión sobre tu proceso de aprendizaje, dificultades encontradas y metas de mejora.</p></div>
+    </div>
+    <table class="rub">
+      <tr><th>Criterio</th><th>Excelente (4)</th><th>Bien (3)</th><th>Suficiente (2)</th><th>Mejorable (1)</th><th>Pts</th></tr>
+      <tr><td>Vocabulario</td><td>Rico y preciso</td><td>Adecuado, pocos errores</td><td>Básico, errores frecuentes</td><td>Muy limitado</td><td><span class="pts">40</span></td></tr>
+      <tr><td>Gramática</td><td>Conjugaciones correctas</td><td>Mayoría correctas</td><td>Errores pero comprensible</td><td>Errores graves</td><td><span class="pts">30</span></td></tr>
+      <tr><td>Pronunciación</td><td>Fluida y correcta</td><td>Comprensible</td><td>Básica</td><td>Difícil de entender</td><td><span class="pts">20</span></td></tr>
+      <tr><td>Cultura</td><td>Precisa y contextualizada</td><td>Correcta</td><td>Parcial</td><td>Insuficiente</td><td><span class="pts">10</span></td></tr>
+    </table>
+    <div class="stitle" style="margin-bottom:4px;">Parte 1 — Examen integrador (25 preguntas)</div>
+    <div class="ssub" style="margin-bottom:16px;">Cubre contenidos de las 3 lecciones.</div>
+    <div id="qzfinal"></div>
+    <div class="hr"></div>
+    <div class="stitle" style="margin-bottom:4px;">Parte 2 — Producción escrita</div>
+    <div class="ssub" style="margin-bottom:12px;">Redacta 100–150 palabras presentando un personaje francófono ficticio.</div>
+    <div class="mini-form" style="max-width:520px;margin-bottom:12px;">
+      <label>Tu nombre</label><input id="efn" placeholder="Tu nombre completo">
+      <label>Texto en francés (100–150 palabras)</label>
+      <textarea id="eft" oninput="wc('eft','efwc')" class="write-area" style="height:130px;" placeholder="Bonjour! Je m'appelle… Mon personnage s'appelle… Il/Elle est… et il/elle habite à…"></textarea>
+      <div class="wc" id="efwc">0 palabras</div>
+    </div>
+    <div class="hr"></div>
+    <div class="stitle" style="margin-bottom:4px;">Parte 4 — Autoevaluación</div>
+    <div class="ssub" style="margin-bottom:12px;">Reflexiona sobre tu proceso de aprendizaje.</div>
+    <div id="autoev"></div>
+  </div>
+</div>
+
+<!-- RECURSOS -->
+<div class="sec" id="recursos">
+  <div class="hero grn"><h2>Ressources Générales</h2><p>Material de refuerzo, ampliación, glosario y fuentes externas reales para todo el curso.</p></div>
+  <div class="content">
+    <div class="grid2">
+      <div>
+        <div class="rsec"><h3>📚 Material de refuerzo</h3>
+          <div class="rcard"><div class="rico ri-b">📘</div><div><h4>Français Facile — Gramática A1</h4><p>Lecciones de gramática interactivas: pronombres, verbos -ER, artículos, negación "ne…pas" y preguntas básicas. Ejercicios con corrección automática.</p><div class="rutil">Gramática francesa gratuita con ejercicios.</div><a class="rlink" href="https://www.francaisfacile.com/cours/debutant.php" target="_blank">🔗 Ir al recurso →</a></div></div>
+          <div class="rcard"><div class="rico ri-b">🎙️</div><div><h4>Forvo — Pronunciación nativa</h4><p>Banco de pronunciaciones grabadas por hablantes nativos del francés. Busca cualquier palabra y escucha cómo se pronuncia en Francia, Québec y más.</p><div class="rutil">Ideal para resolver dudas de pronunciación.</div><a class="rlink" href="https://es.forvo.com/languages/fr/" target="_blank">🔗 Ir al recurso →</a></div></div>
+          <div class="rcard"><div class="rico ri-b">📝</div><div><h4>Conjugaison.com — Verbos -ER</h4><p>Conjugador completo de verbos franceses en todos los tiempos y personas. Busca manger, parler, habiter y cualquier verbo del curso.</p><div class="rutil">Consulta antes de las evaluaciones de conjugación.</div><a class="rlink" href="https://www.conjugaison.com/" target="_blank">🔗 Ir al recurso →</a></div></div>
+        </div>
+        <div class="rsec" style="margin-top:20px;"><h3>📌 Glosario interactivo</h3>
+          <p style="font-size:12.5px;color:#4a4a6a;margin-bottom:10px;">Haz clic en cada palabra para ver la traducción.</p>
+          <div class="glos-grid" id="glosario"></div>
+          <div style="margin-top:12px;">
+            <div class="rcard"><div class="rico ri-b">📖</div><div><h4>WordReference FR–ES</h4><p>Diccionario francés–español en línea con ejemplos de uso, foro de dudas y audio de pronunciación para cada entrada.</p><div class="rutil">El diccionario bilingüe más completo disponible.</div><a class="rlink" href="https://www.wordreference.com/fres/" target="_blank">🔗 Ir al recurso →</a></div></div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="rsec"><h3>📖 Material de ampliación</h3>
+          <div class="rcard"><div class="rico ri-g">📺</div><div><h4>TV5Monde — Ejercicios A1/A2</h4><p>Plataforma oficial de la televisión francófona: ejercicios de comprensión, vocabulario y gramática basados en videos y lecturas auténticas nivel A1–A2.</p><div class="rutil">Practica con contenido audiovisual real en francés.</div><a class="rlink" href="https://apprendre.tv5monde.com/fr" target="_blank">🔗 Ir al recurso →</a></div></div>
+          <div class="rcard"><div class="rico ri-g">🗣️</div><div><h4>RFI Savoirs — Audios y diálogos</h4><p>Radio Francia Internacional: ejercicios de comprensión oral, diálogos cotidianos y actividades de lectura. Noticias adaptadas a nivel A2.</p><div class="rutil">Escucha francés auténtico a ritmo adaptado.</div><a class="rlink" href="https://savoirs.rfi.fr/fr/apprendre-enseigner/langue-francaise" target="_blank">🔗 Ir al recurso →</a></div></div>
+          <div class="rcard"><div class="rico ri-g">🌍</div><div><h4>Organisation Internationale de la Francophonie</h4><p>Datos oficiales sobre el mundo francófono: países, hablantes, cultura y misión de la OIF. Ideal para la Lección 3 sobre la Francofonie.</p><div class="rutil">Fuente oficial para datos culturales y geográficos.</div><a class="rlink" href="https://www.francophonie.org/" target="_blank">🔗 Ir al recurso →</a></div></div>
+        </div>
+        <div class="rsec" style="margin-top:20px;"><h3>📂 Curación de contenido</h3>
+          <div class="rcard"><div class="rico ri-r">📋</div><div><h4>Larousse — Diccionario francés</h4><p>Diccionario monolingüe y bilingüe Larousse en línea: definiciones, ejemplos, sinónimos y conjugaciones. La referencia académica estándar del francés.</p><div class="rutil">Referencia léxica oficial para el curso.</div><a class="rlink" href="https://www.larousse.fr/dictionnaires/francais-espagnol" target="_blank">🔗 Ir al recurso →</a></div></div>
+          <div class="rcard"><div class="rico ri-r">🗂️</div><div><h4>Alliance Française — México</h4><p>Institución cultural oficial francesa en México. Ofrece cursos, certificaciones DELF/DALF y eventos culturales para continuar el aprendizaje más allá del curso.</p><div class="rutil">Para continuar aprendiendo francés de forma formal.</div><a class="rlink" href="https://www.alianzafrancesa.org.mx/" target="_blank">🔗 Ir al recurso →</a></div></div>
+        </div>
+        <div class="rsec" style="margin-top:20px;"><h3>▶️ Videos recomendados</h3>
+          <p style="font-size:12.5px;color:#4a4a6a;margin-bottom:12px;">Canales y búsquedas en YouTube para reforzar cada lección. Haz clic para abrir directamente en YouTube.</p>
+          <div class="rcard"><div class="rico ri-r" style="background:rgba(255,0,0,0.07);">▶️</div><div>
+            <h4>Lección 1 — Les salutations et se présenter</h4>
+            <p>Saludos, presentaciones y pronunciación básica explicados por hablantes nativos.</p>
+            <a class="rlink" href="https://www.youtube.com/results?search_query=saludos+en+frances+A1+presentarse" target="_blank">▶ Buscar en YouTube →</a>
+          </div></div>
+          <div class="rcard"><div class="rico ri-r" style="background:rgba(255,0,0,0.07);">▶️</div><div>
+            <h4>Lección 2 — Verbos -ER y la routine quotidienne</h4>
+            <p>Conjugación de verbos -ER en presente y vocabulario de rutinas diarias en francés.</p>
+            <a class="rlink" href="https://www.youtube.com/results?search_query=verbos+ER+frances+presente+A1" target="_blank">▶ Buscar en YouTube →</a>
+          </div></div>
+          <div class="rcard"><div class="rico ri-r" style="background:rgba(255,0,0,0.07);">▶️</div><div>
+            <h4>Lección 3 — La culture et la gastronomie française</h4>
+            <p>Cultura, gastronomía y geografía francófona explicada en español para estudiantes.</p>
+            <a class="rlink" href="https://www.youtube.com/results?search_query=cultura+francesa+gastronomia+para+estudiantes" target="_blank">▶ Buscar en YouTube →</a>
+          </div></div>
+          <div class="rcard" style="background:rgba(255,0,0,0.03);"><div class="rico ri-r" style="background:rgba(255,0,0,0.07);">⭐</div><div>
+            <h4>Canales recomendados</h4>
+            <p style="margin-bottom:6px;">Los mejores canales gratuitos de YouTube para aprender francés:</p>
+            <p><a href="https://www.youtube.com/@LearnFrenchwithAlexa" target="_blank" style="color:var(--blue);font-weight:700;text-decoration:none;">Learn French with Alexa</a> — A1 a B1, muy didáctico<br>
+            <a href="https://www.youtube.com/@innerfrench" target="_blank" style="color:var(--blue);font-weight:700;text-decoration:none;">InnerFrench</a> — Comprensión oral, nivel A2+<br>
+            <a href="https://www.youtube.com/@francaisavecpierre" target="_blank" style="color:var(--blue);font-weight:700;text-decoration:none;">Français avec Pierre</a> — Gramática y conversación</p>
+          </div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- EQUIPO -->
+<div class="sec" id="equipo">
+  <div class="hero prp"><h2>Notre Équipe</h2><p>Las personas que diseñaron y construyeron esta plataforma educativa.</p></div>
+  <div class="content">
+    <div class="grid2c">
+      <div class="tcard"><div class="tav av1">FC</div><h4>Frida Carol Garcia Ramos</h4><div class="trole">Coordinadora del Proyecto</div><p>Planificación general, estructura pedagógica y diseño del curso. Elaboró los contenidos de las 3 lecciones, las evaluaciones, la rúbrica y la selección de recursos.</p></div>
+      <div class="tcard"><div class="tav av4">ML</div><h4>Maria Luisa Perez Díaz</h4><div class="trole">Diseño de la Plataforma</div><p>Desarrolló y programó la plataforma LMS completa: actividades interactivas, quizzes, flashcards, murales colaborativos y juegos de gamificación.</p></div>
+    </div>
+    <div class="refbox">
+      <h3>Reflexión del equipo</h3>
+      <p>Este proyecto representó un reto apasionante: diseñar una experiencia de aprendizaje completa que fuera académicamente rigurosa y genuinamente motivante.</p>
+      <blockquote>"Aprender a diseñar para otras personas nos hizo aprender más a nosotras mismas. Tuvimos que preguntarnos: ¿qué necesita alguien que ve el francés por primera vez? ¿qué lo mantendrá enganchado y lo llevará a querer seguir aprendiendo?"</blockquote>
+      <p>El mayor aprendizaje fue entender que la tecnología educativa no reemplaza al docente: la amplifica. Cada actividad fue diseñada con un propósito pedagógico claro. Esperamos que esta plataforma despierte el amor por el francés.</p>
+      <p style="margin-top:12px;color:rgba(255,255,255,0.35);font-size:11px;">— Frida Carol Garcia Ramos &amp; Maria Luisa Perez Díaz · Proyecto LMS · Bachillerato · 2025</p>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<script>
+// NAV
+function go(id){
+  document.querySelectorAll('.sec').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.nl').forEach(l=>l.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.querySelectorAll('.nl').forEach(l=>{if(l.getAttribute('onclick')&&l.getAttribute('onclick').includes("'"+id+"'"))l.classList.add('active');});
+  window.scrollTo(0,0);
+  setTimeout(initAll,100);
+}
+function tab(lesson,t){
+  const l=document.getElementById(lesson);
+  l.querySelectorAll('.tp').forEach(p=>p.classList.remove('active'));
+  l.querySelectorAll('.tab').forEach(b=>b.classList.remove('active'));
+  const o=['in','co','re','ac','ev'],i=o.indexOf(t);
+  const p=document.getElementById(lesson+'-'+t);if(p)p.classList.add('active');
+  const tabs=l.querySelectorAll('.tab');if(tabs[i])tabs[i].classList.add('active');
+  setTimeout(initAll,100);
+}
+
+// WORD COUNT
+function wc(tid,wid){const v=document.getElementById(tid).value.trim().split(/\s+/).filter(w=>w).length;document.getElementById(wid).textContent=v+' palabras';}
+
+// FLASHCARDS
+const FC={
+  1:{i:0,data:[
+    {f:'Bonjour',e:'Buenos días / tardes',h:'Formal y general'},
+    {f:'Bonsoir',e:'Buenas noches',h:'Tarde-noche'},
+    {f:'Salut',e:'Hola / Chau',h:'Informal'},
+    {f:'Au revoir',e:'Adiós',h:'Formal'},
+    {f:'Ça va?',e:'¿Cómo estás?',h:'Informal'},
+    {f:"Je m'appelle…",e:'Me llamo…',h:'Para presentarse'},
+    {f:"J'ai … ans",e:'Tengo … años',h:'Para la edad'},
+    {f:'Enchanté(e)',e:'Mucho gusto',h:'Al conocer a alguien'},
+    {f:'Comment allez-vous?',e:'¿Cómo está usted?',h:'Muy formal'},
+    {f:"J'habite à…",e:'Vivo en…',h:'Para decir dónde vives'}
+  ]},
+  2:{i:0,data:[
+    {f:'Se lever',e:'Levantarse',h:'Je me lève à 7h'},
+    {f:'Prendre le petit-déjeuner',e:'Desayunar',h:'Le matin'},
+    {f:"Aller à l'école",e:'Ir a la escuela',h:"J'y vais à 8h"},
+    {f:'Déjeuner',e:'Almorzar',h:'À midi'},
+    {f:'Travailler',e:'Trabajar',h:'Je travaille beaucoup'},
+    {f:'Rentrer à la maison',e:'Regresar a casa',h:'À 17h'},
+    {f:'Dîner',e:'Cenar',h:'Le soir'},
+    {f:'Se coucher',e:'Acostarse',h:'Je me couche à 22h'},
+    {f:'Regarder la télé',e:'Ver televisión',h:'Le soir souvent'},
+    {f:'Écouter de la musique',e:'Escuchar música',h:"J'écoute souvent"}
+  ]},
+  3:{i:0,data:[
+    {f:'Le 14 juillet',e:'Fête Nationale',h:'Revolución Francesa 1789'},
+    {f:'La baguette',e:'Pan baguette',h:'Símbolo de Francia'},
+    {f:'Le fromage',e:'El queso',h:'Francia: +1,200 variedades'},
+    {f:'La Tour Eiffel',e:'La Torre Eiffel',h:'Construida en 1889'},
+    {f:'Les crêpes',e:'Las crepas',h:'La Chandeleur: 2 février'},
+    {f:'Claude Monet',e:'Pintor impresionista',h:'Famoso por "Les Nymphéas"'},
+    {f:'La Francophonie',e:'Mundo francófono',h:'84 países y regiones'},
+    {f:'Le Louvre',e:'Museo del Louvre',h:'El más visitado del mundo'},
+    {f:'Victor Hugo',e:'Escritor y poeta',h:'"Les Misérables"'},
+    {f:"La Fête de la Musique",e:'Fiesta de la Música',h:'21 juin, conciertos gratuitos'}
+  ]}
+};
+function flipFC(n){document.getElementById('fc'+n).classList.toggle('flip');}
+function navFC(n,d){
+  const fc=FC[n];
+  document.getElementById('fc'+n).classList.remove('flip');
+  fc.i=(fc.i+d+fc.data.length)%fc.data.length;
+  const cur=fc.data[fc.i];
+  document.getElementById('fc'+n+'w').textContent=cur.f;
+  document.getElementById('fc'+n+'e').textContent=cur.e;
+  document.getElementById('fc'+n+'h').textContent=cur.h;
+  document.getElementById('fc'+n+'c').textContent=(fc.i+1)+' / '+fc.data.length;
+}
+
+// MURALS
+const murals={1:[],2:[],3:[]};
+const colors=['#e6f1fb','#e1f5ee','#faeeda','#fbeaf0','#eeedfe','#faece7'];
+function postMural(n){
+  let data={};
+  if(n===1){
+    const nm=document.getElementById('m1n').value.trim(),
+          ag=document.getElementById('m1a').value,
+          ct=document.getElementById('m1c').value.trim(),
+          lk=document.getElementById('m1l').value.trim();
+    if(!nm||!ag||!ct||!lk){alert('Completa todos los campos.');return;}
+    data={name:nm,lines:["J'ai "+ag+" ans","J'habite à "+ct,lk]};
+    ['m1n','m1a','m1c','m1l'].forEach(id=>document.getElementById(id).value='');
+  } else if(n===2){
+    const nm=document.getElementById('m2n').value.trim(),
+          tx=document.getElementById('m2t').value.trim();
+    if(!nm||tx.split(' ').length<8){alert('Completa nombre y la rutina (mín. 8 palabras).');return;}
+    data={name:nm,lines:[tx]};
+    document.getElementById('m2n').value='';document.getElementById('m2t').value='';document.getElementById('m2wc').textContent='0 palabras';
+  } else {
+    const nm=document.getElementById('m3n').value.trim(),
+          ps=document.getElementById('m3p').value,
+          tx=document.getElementById('m3t').value.trim();
+    if(!nm||ps.startsWith('Elige')||!tx){alert('Completa todos los campos.');return;}
+    data={name:nm,lines:[ps,tx]};
+    document.getElementById('m3n').value='';document.getElementById('m3t').value='';document.getElementById('m3wc').textContent='0 palabras';
+  }
+  murals[n].push(data);
+  const c=document.getElementById('mural'+n);
+  c.innerHTML=murals[n].map((m,i)=>'<div class="mcard" style="background:'+colors[i%colors.length]+'"><strong>'+m.name+'</strong>'+m.lines.map(l=>'<div>'+l+'</div>').join('')+'</div>').join('');
+}
+
+// CLOUD
+function showCloud(){
+  const vals=['c1','c2','c3','c4'].map(id=>document.getElementById(id).value.trim()).filter(v=>v);
+  if(!vals.length)return;
+  document.getElementById('cloudout').style.display='block';
+  document.getElementById('cloudout').innerHTML='<div style="background:#f5f2ec;border-radius:10px;padding:16px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:center;">'+vals.map(v=>'<span style="background:var(--navy);color:#fff;padding:7px 16px;border-radius:18px;font-size:14px;font-weight:700;">'+v+'</span>').join('')+'</div><p style="font-size:12px;color:#7a7a9a;margin-top:8px;text-align:center;">¡Ya tienes un vocabulario cultural inicial en francés!</p>';
+}
+
+// DETONADORA L1
+const det1qs=["¿Qué palabras en francés conocías antes de este curso? Escribe al menos 3.","¿Por qué crees que aprender francés puede ser útil para tu futuro?","¿En qué países del mundo se habla francés? ¿Puedes nombrar alguno?"];
+let det1i=0;
+function initDet1(){
+  const c=document.getElementById('det1');if(!c||c.dataset.built)return;c.dataset.built='1';
+  renderDet1();
+}
+function renderDet1(){
+  const c=document.getElementById('det1');
+  if(det1i>=det1qs.length){c.innerHTML='<p style="color:#1a4a1a;font-weight:700;">✓ ¡Reflexión completada! Continúa con el Contenido.</p><button class="btn btn-s" onclick="tab(\'l1\',\'co\')" style="margin-top:8px;">Ir al Contenido →</button>';return;}
+  c.innerHTML='<div class="qprog">Pregunta '+(det1i+1)+' de '+det1qs.length+'</div><div class="qQ">'+det1qs[det1i]+'</div><textarea class="write-area" id="det1ans" placeholder="Escribe tu respuesta..." style="height:80px;margin-bottom:10px;"></textarea><button class="btn btn-n" onclick="det1next()">Siguiente →</button>';
+}
+function det1next(){const a=document.getElementById('det1ans').value.trim();if(!a){document.getElementById('det1ans').style.borderColor='var(--red)';return;}det1i++;renderDet1();}
+
+// QUIZ ENGINE
+function buildQuiz(cid,data,label){
+  const c=document.getElementById(cid);if(!c||c.dataset.built)return;c.dataset.built='1';
+  let idx=0,score=0;
+  const pq='_pq_'+cid, rq='_rq_'+cid, nx='_nx_'+cid;
+  const render=()=>{
+    if(idx>=data.length){
+      const pct=Math.round(score/data.length*100);
+      c.innerHTML='<div style="background:#fff;border:1px solid var(--border);border-radius:12px;padding:24px;"><div class="score-big">'+score+'/'+data.length+'</div><div class="score-sub">'+pct+'% — '+label+'</div><div class="pbar" style="margin:12px 0 4px"><div class="pfill" style="width:'+pct+'%"></div></div><button class="btn btn-s" style="margin-top:12px" onclick="'+rq+'()">Volver a intentar</button></div>';
+      return;
+    }
+    const d=data[idx];
+    c.innerHTML='<div style="background:#fff;border:1px solid var(--border);border-radius:12px;padding:20px;"><div class="pbar" style="margin-bottom:10px"><div class="pfill" style="width:'+Math.round(idx/data.length*100)+'%"></div></div><div class="qprog">Pregunta '+(idx+1)+' de '+data.length+' · Puntaje: '+score+'</div><div class="qQ">'+d.q+'</div><div class="qopts">'+d.opts.map((o,i)=>'<button class="qopt" onclick="'+pq+'(this,'+i+','+d.a+')">'+o+'</button>').join('')+'</div><div class="qfb" id="'+cid+'fb"></div><button class="btn btn-n" id="'+cid+'nx" style="display:none" onclick="'+nx+'()">Siguiente →</button></div>';
+  };
+  window[nx]=()=>{idx++;render();};
+  window[pq]=(el,sel,correct)=>{
+    if(document.getElementById(cid+'nx').style.display!=='none')return;
+    document.querySelectorAll('#'+cid+' .qopt').forEach(o=>o.style.pointerEvents='none');
+    const fb=document.getElementById(cid+'fb');fb.style.display='block';
+    if(sel===correct){el.classList.add('ok');score++;fb.className='qfb qfb-ok';fb.innerHTML='✓ ¡Correcto!';}
+    else{el.classList.add('err');document.querySelectorAll('#'+cid+' .qopt')[correct].classList.add('ok');fb.className='qfb qfb-err';fb.innerHTML='✗ Correcta: '+data[idx].opts[correct];}
+    document.getElementById(cid+'nx').style.display='inline-block';
+  };
+  window[rq]=()=>{c.removeAttribute('data-built');idx=0;score=0;buildQuiz(cid,data,label);};
+  render();
+}
+
+// QUIZ DATA
+const qd1=[
+  {q:'¿Cuál es el saludo formal en francés?',opts:['Salut','Bonjour','Ciao','Hola'],a:1},
+  {q:'¿Cómo se dice "Me llamo" en francés?',opts:['Je suis',"J'ai","Je m'appelle","J'habite"],a:2},
+  {q:'¿Qué significa "Enchanté"?',opts:['Hasta luego','Mucho gusto','Gracias','Por favor'],a:1},
+  {q:'¿Cuál es el número "dix-sept"?',opts:['Quince','Dieciséis','Diecisiete','Dieciocho'],a:2},
+  {q:'"Ça va?" se usa en situaciones…',opts:['Formales','Informales','Solo escritas','Para despedidas'],a:1},
+  {q:'¿Cómo se dice "Vivo en México"?',opts:['Je suis Mexique',"J'habite au Mexique",'Je parle Mexique',"J'ai Mexique"],a:1},
+  {q:'¿Qué significa "Au revoir"?',opts:['Hola','Mucho gusto','Adiós','Por favor'],a:2},
+  {q:'"Vingt" en español es:',opts:['Quince','Dieciocho','Veinte','Veinticinco'],a:2},
+  {q:'¿Cuál tiene acento gráfico en francés?',opts:['Bonjour','Etudiant','Café','Merci'],a:2},
+  {q:'La "liaison" ocurre cuando:',opts:['Hay dos consonantes','Consonante final + vocal inicial de siguiente palabra','Hay dos vocales','Hay un silencio'],a:1}
+];
+const qd2=[
+  {q:'¿Cómo se conjuga "manger" con "nous"?',opts:['mangons','mangeons','mangez','mangent'],a:1},
+  {q:'¿Qué significa "Se coucher"?',opts:['Levantarse','Desayunar','Acostarse','Cenar'],a:2},
+  {q:'"Il est trois heures et demie" son las:',opts:['3:00','3:15','3:30','3:45'],a:2},
+  {q:'¿Cómo se dice "lunes" en francés?',opts:['Dimanche','Samedi','Vendredi','Lundi'],a:3},
+  {q:'¿Qué significa "toujours"?',opts:['A veces','Nunca','Siempre','Frecuentemente'],a:2},
+  {q:'Terminación de "tu" en verbos -ER:',opts:['-e','-ons','-es','-ez'],a:2},
+  {q:'"Déjeuner" significa:',opts:['Desayunar','Almorzar','Cenar','Cocinar'],a:1},
+  {q:'"Jamais" significa:',opts:['Siempre','Frecuente','A veces','Nunca'],a:3},
+  {q:'"Rentrer à la maison" significa:',opts:['Salir de casa','Regresar a casa','Limpiar la casa','Dormir en casa'],a:1},
+  {q:'"Vous" en verbos -ER termina en:',opts:['-ons','-ent','-ez','-es'],a:2}
+];
+const qd3=[
+  {q:'¿Qué es "le 14 juillet" en Francia?',opts:['La Navidad','La Fête Nationale','Día de Reyes','La Chandeleur'],a:1},
+  {q:'Francia tiene aproximadamente cuántos tipos de queso:',opts:['Más de 50','Más de 200','Más de 1,200','Exactamente 365'],a:2},
+  {q:'"La baguette" es un tipo de:',opts:['Queso','Pan','Postre','Bebida'],a:1},
+  {q:'¿Quién fue Victor Hugo?',opts:['Pintor','Chef','Escritor y poeta','Arquitecto'],a:2},
+  {q:'La Fête de la Musique es el:',opts:['14 juillet','2 février','21 juin','25 décembre'],a:2},
+  {q:'El francés es lengua oficial en aprox.:',opts:['22 países','45 países','84 países','110 países'],a:2},
+  {q:'"Les crêpes" son el platillo de:',opts:['La Fête nationale','La Chandeleur','Noël','La Fête de la Musique'],a:1},
+  {q:'El Museo del Louvre está en:',opts:['Lyon','Marseille','Bordeaux','Paris'],a:3},
+  {q:'Claude Monet es famoso por:',opts:['Arquitectura gótica','Moda parisina','Pintura impresionista','Literatura romántica'],a:2},
+  {q:'¿Cuál NO es un pintor impresionista francés?',opts:['Monet','Renoir','Degas','Dalí'],a:3}
+];
+const qdF=[
+  {q:'¿Cómo se dice "Buenos días" en francés?',opts:['Bonsoir','Salut','Bonjour','Au revoir'],a:2},
+  {q:'"Je m\'appelle" significa:',opts:['Tengo…','Vivo en…','Soy estudiante','Me llamo…'],a:3},
+  {q:'¿Cómo se conjuga "manger" con "nous"?',opts:['mangeons','mangons','mangez','mangent'],a:0},
+  {q:'"Se coucher" significa:',opts:['Levantarse','Desayunar','Acostarse','Cenar'],a:2},
+  {q:'¿Qué celebra el 14 juillet?',opts:['La Chandeleur','La Fête Nationale','Noël','La Fête de la Musique'],a:1},
+  {q:'¿Cuál es el número "dix-sept"?',opts:['15','16','17','18'],a:2},
+  {q:'"Ça va?" es expresión:',opts:['Formal','Informal','Solo escrita','Para despedidas'],a:1},
+  {q:'"J\'ai 16 ans" significa:',opts:['Soy del 16','Tengo 16 años','Vivo en el 16','Estudio 16 años'],a:1},
+  {q:'"Déjeuner" significa:',opts:['Desayunar','Almorzar','Cenar','Cocinar'],a:1},
+  {q:'"La baguette" es:',opts:['Queso','Postre','Pan','Bebida'],a:2},
+  {q:'Terminación "vous" en -ER:',opts:['-e','-ons','-ez','-ent'],a:2},
+  {q:'"Toujours" significa:',opts:['Nunca','Siempre','A veces','Frecuente'],a:1},
+  {q:'¿Dónde está el Museo del Louvre?',opts:['Lyon','Bordeaux','Marseille','Paris'],a:3},
+  {q:'"Enchanté" se dice cuando:',opts:['Te despides','Conoces a alguien','Pides disculpas','Ordenas comida'],a:1},
+  {q:'¿Qué son "les crêpes"?',opts:['Un queso','Las crepas','Un vino','Un postre helado'],a:1},
+  {q:'"Trois heures et demie" son las:',opts:['3:00','3:15','3:30','3:45'],a:2},
+  {q:'"Lundi" significa:',opts:['Martes','Miércoles','Domingo','Lunes'],a:3},
+  {q:'Victor Hugo fue:',opts:['Pintor','Chef','Escritor','Arquitecto'],a:2},
+  {q:'Francófonos en el mundo aproximadamente:',opts:['50M','150M','300M','500M'],a:2},
+  {q:'"Parler" con "tu" es:',opts:['parle','parles','parlons','parlent'],a:1},
+  {q:'"Jamais" significa:',opts:['Siempre','A veces','Frecuente','Nunca'],a:3},
+  {q:'La "liaison" ocurre:',opts:['Entre dos vocales','Consonante final + vocal inicial siguiente','Entre consonantes','Al inicio de oración'],a:1},
+  {q:'"Aller à l\'école" significa:',opts:['Estudiar en casa','Ir a la escuela','Salir de la escuela','Llegar tarde'],a:1},
+  {q:'Monet es famoso por pintura:',opts:['Cubista','Abstracta','Impresionista','Barroca'],a:2},
+  {q:'"Bonsoir" se usa:',opts:['De mañana','Al mediodía','Tarde-noche','Solo por escrito'],a:2}
+];
+
+// FORMAL/INFORMAL GAME
+const fgData=[
+  {p:'Bonjour!',c:'formal'},{p:'Salut!',c:'informal'},
+  {p:'Comment allez-vous?',c:'formal'},{p:'Ça va?',c:'informal'},
+  {p:'Au revoir',c:'formal'},{p:'À bientôt!',c:'informal'},
+  {p:'Bonsoir, Madame.',c:'formal'},{p:'Ciao!',c:'informal'}
+];
+let fgi=0,fgs=0;
+function initAct1a(){
+  const c=document.getElementById('act1a');if(!c||c.dataset.built)return;c.dataset.built='1';fgi=0;fgs=0;renderFG();
+}
+function renderFG(){
+  const c=document.getElementById('act1a');
+  if(fgi>=fgData.length){
+    c.innerHTML='<div class="score-big">'+fgs+'/'+fgData.length+'</div><div class="score-sub">'+Math.round(fgs/fgData.length*100)+'%</div><button class="btn btn-s" style="margin-top:10px" onclick="fgi=0;fgs=0;renderFG()">Repetir</button>';return;
+  }
+  const d=fgData[fgi];
+  c.innerHTML='<div class="qprog">Expresión '+(fgi+1)+' de '+fgData.length+'</div><div class="qQ">¿Este saludo es formal o informal?<br><span style="font-size:20px;font-weight:700;color:var(--navy)">'+d.p+'</span></div><div style="display:flex;gap:10px;margin-top:6px"><button class="btn btn-n" onclick="checkFG(\'formal\')">Formal</button><button class="btn btn-g" onclick="checkFG(\'informal\')">Informal</button></div><div class="qfb" id="fgfb"></div>';
+}
+function checkFG(ans){
+  const d=fgData[fgi];
+  const fb=document.getElementById('fgfb');fb.style.display='block';
+  if(ans===d.c){fgs++;fb.className='qfb qfb-ok';fb.innerHTML='✓ ¡Correcto!';}
+  else{fb.className='qfb qfb-err';fb.innerHTML='✗ Era '+d.c+'.';}
+  fgi++;setTimeout(renderFG,1200);
+}
+
+// WORD GAME
+const wgData=[
+  {words:["Je","m'appelle","María","et","j'ai","16","ans"],ans:"Je m'appelle María et j'ai 16 ans"},
+  {words:["Bonjour,","je","suis","étudiant(e)","à","Puebla"],ans:"Bonjour, je suis étudiant(e) à Puebla"},
+  {words:["J'habite","à","Mexico","et","j'aime","le","français"],ans:"J'habite à Mexico et j'aime le français"}
+];
+let wgi=0,wgp=[];
+function initAct1c(){
+  const c=document.getElementById('act1c');if(!c||c.dataset.built)return;c.dataset.built='1';wgi=0;wgp=[];renderWG();
+}
+function renderWG(){
+  const c=document.getElementById('act1c');
+  if(wgi>=wgData.length){c.innerHTML='<div class="score-big" style="font-size:20px;">✓ ¡Très bien! Completaste todas las oraciones.</div><button class="btn btn-s" style="margin-top:10px" onclick="wgi=0;wgp=[];renderWG()">Repetir</button>';return;}
+  wgp=[];
+  const s=wgData[wgi];
+  const sh=[...s.words].sort(()=>Math.random()-.5);
+  c.innerHTML='<div class="qprog">Oración '+(wgi+1)+' de '+wgData.length+'</div><div class="qQ">Ordena las palabras:</div><div class="drop" id="wgdrop">Haz clic en las palabras en orden…</div><div class="wgrid">'+sh.map((w,i)=>'<button class="ww" id="ww'+i+'" data-word="'+w.replace(/"/g,'&quot;')+'" onclick="pickW(this)">'+w+'</button>').join('')+'</div><div style="display:flex;gap:8px;margin-top:4px"><button class="btn btn-n" onclick="checkWG()">Verificar</button><button class="btn btn-s" onclick="renderWG()">Reintentar</button></div><div class="qfb" id="wgfb"></div>';
+}
+function pickW(el){if(el.classList.contains('picked'))return;el.classList.add('picked');wgp.push(el.dataset.word);const d=document.getElementById('wgdrop');d.textContent=wgp.join(' ');d.classList.add('has');}
+function checkWG(){
+  const s=wgData[wgi],ans=wgp.join(' ');
+  const fb=document.getElementById('wgfb');fb.style.display='block';
+  if(ans===s.ans){fb.className='qfb qfb-ok';fb.innerHTML='✓ ¡Correct! <b>'+s.ans+'</b>';setTimeout(()=>{wgi++;wgp=[];renderWG();},1800);}
+  else{fb.className='qfb qfb-err';fb.innerHTML='✗ La correcta es: <b>'+s.ans+'</b>';}
+}
+
+// MATCH GAME L2
+const mg2L=['Se réveiller','Prendre le petit-déjeuner',"Aller à l'école",'Déjeuner','Dîner'];
+const mg2R=['7h00 — Mañana temprano','7h30 — Mañana','8h00 — Mañana','12h00 — Mediodía','19h30 — Noche'];
+const mg2OK={0:0,1:1,2:2,3:3,4:4};
+let mg2sel=null,mg2matched=0;
+function initAct2a(){
+  const c=document.getElementById('act2a');if(!c||c.dataset.built)return;c.dataset.built='1';mg2sel=null;mg2matched=0;
+  c.innerHTML='<div class="mgrid"><div class="mcol"><h5>Actividad</h5>'+mg2L.map((t,i)=>'<div class="mi" id="ml'+i+'" onclick="pickML('+i+')">'+t+'</div>').join('')+'</div><div class="mcol"><h5>Momento del día</h5>'+mg2R.map((t,i)=>'<div class="mi" id="mr'+i+'" onclick="pickMR('+i+')">'+t+'</div>').join('')+'</div></div><div id="mg2fb" style="font-size:13px;color:#4a4a6a;margin-top:6px"></div>';
+}
+function pickML(i){if(document.getElementById('ml'+i).classList.contains('matched'))return;document.querySelectorAll('[id^="ml"]').forEach(e=>e.classList.remove('sel'));document.getElementById('ml'+i).classList.add('sel');mg2sel=i;}
+function pickMR(j){
+  if(mg2sel===null)return;
+  if(document.getElementById('mr'+j).classList.contains('matched'))return;
+  const fb=document.getElementById('mg2fb');
+  if(mg2OK[mg2sel]===j){
+    document.getElementById('ml'+mg2sel).classList.replace('sel','matched');
+    document.getElementById('mr'+j).classList.add('matched');
+    mg2matched++;mg2sel=null;
+    fb.innerHTML=mg2matched===mg2L.length?'<b style="color:#1a4a1a">✓ ¡Parfait! Todo correcto.</b>':'✓ ¡Correcto!';
+  } else {
+    document.getElementById('ml'+mg2sel).classList.add('bad');
+    document.getElementById('mr'+j).classList.add('bad');
+    fb.innerHTML='<span style="color:var(--red)">✗ Ese par no es correcto. Intenta de nuevo.</span>';
+    setTimeout(()=>{document.getElementById('ml'+mg2sel).classList.remove('sel','bad');document.getElementById('mr'+j).classList.remove('bad');mg2sel=null;fb.textContent='';},1200);
+  }
+}
+
+// CONJUGATION GAME
+const cjQ=[
+  {q:'Pierre ___ (travailler) beaucoup.',opts:['travaille','travailles','travaillons','travaillez'],a:0},
+  {q:'Nous ___ (manger) à midi.',opts:['mange','mangeons','mangez','mangent'],a:1},
+  {q:'Tu ___ (écouter) de la musique?',opts:['écoute','écoutons','écoutes','écoutez'],a:2},
+  {q:'Vous ___ (habiter) à Paris?',opts:['habites','habitons','habitent','habitez'],a:3},
+  {q:'Elles ___ (regarder) la télé.',opts:['regarde','regardes','regardent','regardons'],a:2},
+  {q:"J'___ (aimer) le français!",opts:['aiment','aimes','aimons','aime'],a:3}
+];
+let cji=0,cjs=0,cjl=3;
+function initAct2c(){
+  const c=document.getElementById('act2c');if(!c||c.dataset.built)return;c.dataset.built='1';cji=0;cjs=0;cjl=3;renderCJ();
+}
+function renderCJ(){
+  const c=document.getElementById('act2c');
+  if(cjl<=0||cji>=cjQ.length){
+    c.innerHTML='<div class="score-big">'+(cjl<=0?'💔 Sin vidas':'🎉 ¡Completado!')+'</div><div class="score-sub">Puntaje: '+cjs+'/'+cjQ.length+'</div><button class="btn btn-s" style="margin-top:10px" onclick="cji=0;cjs=0;cjl=3;renderCJ()">Jugar de nuevo</button>';return;
+  }
+  const d=cjQ[cji];
+  const hearts='❤️'.repeat(cjl)+'🖤'.repeat(3-cjl);
+  c.innerHTML='<div style="font-size:16px;margin-bottom:10px">'+hearts+'</div><div class="qprog">Pregunta '+(cji+1)+' de '+cjQ.length+'</div><div class="qQ">'+d.q+'</div><div class="qopts">'+d.opts.map((o,i)=>'<button class="qopt" onclick="checkCJ(this,'+i+','+d.a+')">'+o+'</button>').join('')+'</div><div class="qfb" id="cjfb"></div>';
+}
+function checkCJ(el,sel,correct){
+  document.querySelectorAll('#act2c .qopt').forEach(o=>o.style.pointerEvents='none');
+  const fb=document.getElementById('cjfb');fb.style.display='block';
+  if(sel===correct){el.classList.add('ok');cjs++;fb.className='qfb qfb-ok';fb.innerHTML='✓ ¡Correct!';}
+  else{el.classList.add('err');cjl--;document.querySelectorAll('#act2c .qopt')[correct].classList.add('ok');fb.className='qfb qfb-err';fb.innerHTML='✗ Correcta: '+cjQ[cji].opts[correct];}
+  cji++;setTimeout(renderCJ,1300);
+}
+
+// CULTURAL QUIZ L3
+const cqQ=[
+  {q:'¿Qué plato se come en "La Chandeleur"?',opts:['La quiche','Les crêpes','Le fromage','La baguette'],a:1},
+  {q:'¿En qué ciudad está el Museo del Louvre?',opts:['Lyon','Bordeaux','Marseille','Paris'],a:3},
+  {q:'¿Quién pintó "Les Nymphéas"?',opts:['Renoir','Degas','Monet','Picasso'],a:2},
+  {q:'¿Qué se celebra el 21 juin?',opts:['La Fête Nationale','La Chandeleur','La Fête de la Musique','Noël'],a:2},
+  {q:'El francés es oficial en aprox. cuántos países:',opts:['12','29','84','150'],a:2}
+];
+function initAct3a(){buildQuiz('act3a',cqQ,'Quiz Cultural');}
+
+// TRIVIA L3
+const tvQ=[
+  {q:'¿Quién diseñó la Torre Eiffel?',opts:['Haussmann','Gustave Eiffel','Le Corbusier','Vauban'],a:1},
+  {q:'¿En qué año se construyó la Torre Eiffel?',opts:['1850','1869','1889','1905'],a:2},
+  {q:'"Le fromage" significa:',opts:['El pan','La mantequilla','El queso','La crema'],a:2},
+  {q:'¿Qué es "une boulangerie"?',opts:['Una farmacia','Una panadería','Un restaurante','Un mercado'],a:1},
+  {q:'Édith Piaf fue famosa por ser:',opts:['Pintora','Actriz','Cantante','Escritora'],a:2},
+  {q:'En qué continente NO es oficial el francés:',opts:['Europa','Asia','Oceanía','África'],a:2},
+  {q:'¿Qué país tiene Quebec como provincia francófona?',opts:['Bélgica','Francia','Haití','Canadá'],a:3},
+  {q:'"Coq au vin" es:',opts:['Pescado al vino','Pollo al vino','Cerdo al vino','Ternera al vino'],a:1},
+  {q:'El Festival de Cannes es de:',opts:['Música','Moda','Cine','Literatura'],a:2},
+  {q:'¿Cuál NO es pintor impresionista francés?',opts:['Monet','Renoir','Degas','Dalí'],a:3},
+  {q:'El pan más icónico de Francia:',opts:['La ciabatta','La baguette','El croissant','La focaccia'],a:1},
+  {q:'"La Marseillaise" es:',opts:['Un plato típico','El himno de Francia','Un museo','Una danza'],a:1},
+  {q:'Turistas en Francia por año (aprox):',opts:['30M','50M','70M','90M'],a:3},
+  {q:'El Río Sena pasa por:',opts:['Lyon','Bordeaux','Paris','Toulouse'],a:2},
+  {q:'"Vive la France" significa:',opts:['Viva Francia','Viaja a Francia','Ama a Francia','Come en Francia'],a:0}
+];
+let tvi=0,tvs=0;
+function initAct3c(){
+  const c=document.getElementById('act3c');if(!c||c.dataset.built)return;c.dataset.built='1';tvi=0;tvs=0;renderTV();
+}
+function renderTV(){
+  const c=document.getElementById('act3c');
+  if(tvi>=tvQ.length){
+    const pct=Math.round(tvs/tvQ.length*100);
+    c.innerHTML='<div class="score-big">🏆 '+tvs+'/'+tvQ.length+'</div><div class="score-sub">'+pct+'%</div><div class="pbar" style="margin:10px 0 4px"><div class="pfill" style="width:'+pct+'%;background:var(--gold)"></div></div><button class="btn btn-s" style="margin-top:10px" onclick="tvi=0;tvs=0;renderTV()">Jugar de nuevo</button>';return;
+  }
+  const d=tvQ[tvi];
+  c.innerHTML='<div class="pbar" style="margin-bottom:10px"><div class="pfill" style="width:'+Math.round(tvi/tvQ.length*100)+'%;background:var(--gold)"></div></div><div class="qprog">Pregunta '+(tvi+1)+' de '+tvQ.length+' · Puntaje: '+tvs+'</div><div class="qQ">'+d.q+'</div><div class="qopts">'+d.opts.map((o,i)=>'<button class="qopt" onclick="checkTV(this,'+i+','+d.a+')">'+o+'</button>').join('')+'</div><div class="qfb" id="tvfb"></div>';
+}
+function checkTV(el,sel,correct){
+  document.querySelectorAll('#act3c .qopt').forEach(o=>o.style.pointerEvents='none');
+  const fb=document.getElementById('tvfb');fb.style.display='block';
+  if(sel===correct){el.classList.add('ok');tvs++;fb.className='qfb qfb-ok';fb.innerHTML='✓ ¡Correct! +1 punto';}
+  else{el.classList.add('err');document.querySelectorAll('#act3c .qopt')[correct].classList.add('ok');fb.className='qfb qfb-err';fb.innerHTML='✗ Correcta: '+tvQ[tvi].opts[correct];}
+  tvi++;setTimeout(renderTV,1400);
+}
+
+// AUTOEVALUACIÓN
+const aeQ=[
+  {q:'¿Qué tan bien puedes presentarte en francés?',opts:['Muy bien, con seguridad','Bien, con algunos errores','Regular, necesito practicar','Poco, me falta mucho']},
+  {q:'¿Qué fue lo más difícil del curso?',opts:['La pronunciación','La gramática y conjugaciones','El vocabulario','La comprensión cultural']},
+  {q:'¿Qué fue lo que más disfrutaste?',opts:['Las actividades interactivas','El vocabulario nuevo','La cultura francesa','Las evaluaciones']},
+  {q:'¿Cómo calificarías tu esfuerzo?',opts:['Excelente, máximo esfuerzo','Bueno, hice la mayoría','Regular, pude hacer más','Bajo, faltó constancia']},
+  {q:'¿Te gustaría continuar aprendiendo francés?',opts:['Sí, definitivamente','Sí, probablemente','No estoy seguro/a','No creo']}
+];
+let aei=0,aeans=[];
+function initAutoEv(){
+  const c=document.getElementById('autoev');if(!c||c.dataset.built)return;c.dataset.built='1';aei=0;aeans=[];renderAE();
+}
+function renderAE(){
+  const c=document.getElementById('autoev');
+  if(aei>=aeQ.length){
+    c.innerHTML='<div style="background:#fff;border:1px solid var(--border);border-radius:12px;padding:20px;"><div style="color:#1a4a1a;font-weight:700;margin-bottom:10px">✓ Autoevaluación completada</div><p style="font-size:13px;color:#4a4a6a;line-height:1.7;margin-bottom:14px;">Gracias por reflexionar sobre tu aprendizaje. ¡Félicitations pour avoir terminé le cours!</p>'+aeans.map((a,i)=>'<div style="font-size:12.5px;margin-bottom:8px;padding:8px 12px;background:#f5f2ec;border-radius:7px;"><b>'+aeQ[i].q+'</b><br>'+a+'</div>').join('')+'</div>';
+    return;
+  }
+  const d=aeQ[aei];
+  c.innerHTML='<div style="background:#fff;border:1px solid var(--border);border-radius:12px;padding:20px;"><div class="qprog">Reflexión '+(aei+1)+' de '+aeQ.length+'</div><div class="qQ">'+d.q+'</div><div class="qopts">'+d.opts.map(o=>'<button class="qopt" data-ans="'+o.replace(/"/g,'&quot;')+'" onclick="pickAE(this)">'+o+'</button>').join('')+'</div></div>';
+}
+function pickAE(el){aeans.push(el.dataset.ans);aei++;renderAE();}
+
+// GLOSARIO
+const glos=[
+  {f:'Bonjour',e:'Buenos días'},{f:'Merci',e:'Gracias'},
+  {f:"S'il vous plaît",e:'Por favor'},{f:'Pardon',e:'Perdón'},
+  {f:'Oui / Non',e:'Sí / No'},{f:'Je ne comprends pas',e:'No entiendo'},
+  {f:'Comment dit-on…?',e:'¿Cómo se dice…?'},{f:'Où est…?',e:'¿Dónde está…?'},
+  {f:'Je voudrais…',e:'Quisiera…'},{f:"C'est délicieux!",e:'¡Está delicioso!'},
+  {f:'Félicitations',e:'¡Felicidades!'},{f:'Bonne chance!',e:'¡Buena suerte!'},
+  {f:'Avec plaisir',e:'Con gusto'},{f:'Bien sûr',e:'Por supuesto'},
+  {f:"À tout à l'heure",e:'Hasta luego'}
+];
+function initGlosario(){
+  const c=document.getElementById('glosario');if(!c||c.dataset.built)return;c.dataset.built='1';
+  c.innerHTML=glos.map(g=>'<div class="gitem" onclick="this.classList.toggle(\'open\')"><div class="gfr">'+g.f+'</div><div class="ges">'+g.e+'</div></div>').join('');
+}
+
+// INIT ALL
+function initAll(){
+  initDet1();initAct1a();initAct1c();
+  initAct2a();initAct2c();
+  initAct3a();initAct3c();
+  initAutoEv();initGlosario();
+  buildQuiz('qz1',qd1,'Lección 1');
+  buildQuiz('qz2',qd2,'Lección 2');
+  buildQuiz('qz3',qd3,'Lección 3');
+  buildQuiz('qzfinal',qdF,'Evaluación Final');
+}
+window.addEventListener('DOMContentLoaded',()=>setTimeout(initAll,200));
+</script>
+</body>
+</html>
